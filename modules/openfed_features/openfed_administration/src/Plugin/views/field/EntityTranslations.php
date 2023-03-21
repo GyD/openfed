@@ -76,13 +76,13 @@ class EntityTranslations extends FieldPluginBase {
       $entity_languages_options[$key] = $language->getName();
     }
     // Field with all the enabled languages on the website.
-    $form['entity_languages'] = array(
+    $form['entity_languages'] = [
       '#title' => $this->t('Languages to exclude'),
       '#description' => $this->t('Select the languages that should be excluded when displaying translations.'),
       '#type' => 'checkboxes',
       '#options' => $entity_languages_options,
       '#default_value' => $this->options['entity_languages'],
-    );
+    ];
 
     parent::buildOptionsForm($form, $form_state);
   }

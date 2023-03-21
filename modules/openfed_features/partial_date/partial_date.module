@@ -13,18 +13,18 @@ function partial_date_help($route_name, RouteMatchInterface $route_match) {
       $output = '<h3>' . t('About') . '</h3>';
       $output .= '<p>' . t('The <i>Partial Date</i> module provides the ability to store incomplete dates (like Year & Month only). '
           . 'For more information see the <a href=":doc">online documentation</a>.',
-          array(':doc' => 'https://www.drupal.org/project/partial_date')) . '</p>';
+          [':doc' => 'https://www.drupal.org/project/partial_date']) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
-      $output .= '<dt>'. t('Partial date formats') . '</dt>';
-      $output .= '<dd>'. t('Three formats are provided by default (<i>short</i>, <i>medium</i> & <i>long</i>). '
+      $output .= '<dt>' . t('Partial date formats') . '</dt>';
+      $output .= '<dd>' . t('Three formats are provided by default (<i>short</i>, <i>medium</i> & <i>long</i>). '
           . 'You may addapt them to your needs or create additional ones through <a href=":doc">configuration page</a>.',
-          array(':doc' => '/admin/config/regional/partial-date-formats')) . '</dd>';
-      $output .= '<dt>'. t('Estimates') . '</dt>';
-      $output .= '<dd>'. t('The module allow users to enter a more readable text value, for example, "<i>The stone age </i>" or "<i>Jurrassic period </i>". '
+          [':doc' => '/admin/config/regional/partial-date-formats']) . '</dd>';
+      $output .= '<dt>' . t('Estimates') . '</dt>';
+      $output .= '<dd>' . t('The module allow users to enter a more readable text value, for example, "<i>The stone age </i>" or "<i>Jurrassic period </i>". '
           . 'These estimate values are optional and can be disabled.') . '</dd>';
-      $output .= '<dt>'. t('Timezone') . '</dt>';
-      $output .= '<dd>'. t('Currently a timezone may be available to users. However, it is for informational uses only. '
+      $output .= '<dt>' . t('Timezone') . '</dt>';
+      $output .= '<dd>' . t('Currently a timezone may be available to users. However, it is for informational uses only. '
           . 'Not timezone conversion is performed. This may change in the future.') . '</dd>';
       $output .= '</dl>';
       return $output;
@@ -35,7 +35,7 @@ function partial_date_help($route_name, RouteMatchInterface $route_match) {
  * Implements hook_theme().
  */
 function partial_date_theme() {
-  return array(
+  return [
     'partial_date' => [
       'variables' => [
         'date' => [],
@@ -51,10 +51,10 @@ function partial_date_theme() {
       ],
       'file' => 'partial_date.theme.inc',
     ],
-    'checkbox_with_options' => array(
+    'checkbox_with_options' => [
       'render element' => 'element',
-    ),
-  );
+    ],
+  ];
 }
 
 /**
@@ -64,15 +64,15 @@ function partial_date_theme() {
 function partial_date_components(array $excluded_components = NULL) {
   static $components = NULL;
   if (!isset($components)) {
-    $components = array(
-      'year' => t('Year', array(), array('context' => 'datetime')),
-      'month' => t('Month', array(), array('context' => 'datetime')),
-      'day' => t('Day', array(), array('context' => 'datetime')),
-      'hour' => t('Hour', array(), array('context' => 'datetime')),
-      'minute' => t('Minute', array(), array('context' => 'datetime')),
-      'second' => t('Second', array(), array('context' => 'datetime')),
-      'timezone' => t('Timezone', array(), array('context' => 'datetime')),
-    );
+    $components = [
+      'year' => t('Year', [], ['context' => 'datetime']),
+      'month' => t('Month', [], ['context' => 'datetime']),
+      'day' => t('Day', [], ['context' => 'datetime']),
+      'hour' => t('Hour', [], ['context' => 'datetime']),
+      'minute' => t('Minute', [], ['context' => 'datetime']),
+      'second' => t('Second', [], ['context' => 'datetime']),
+      'timezone' => t('Timezone', [], ['context' => 'datetime']),
+    ];
   }
   if ($excluded_components) {
     return array_diff_key($components, array_flip($excluded_components));
@@ -87,7 +87,7 @@ function partial_date_components(array $excluded_components = NULL) {
 function partial_date_component_keys() {
   static $components = NULL;
   if (!isset($components)) {
-    $components = array(
+    $components = [
       'year',
       'month',
       'day',
@@ -95,7 +95,7 @@ function partial_date_component_keys() {
       'minute',
       'second',
       'timezone',
-    );
+    ];
   }
   return $components;
 }
@@ -151,12 +151,13 @@ function partial_date_timezone_handling_correlation($timezone = '', $tz_handling
  * @param array $options
  *   Additional values to prefix onto the options list.
  */
-function partial_date_granularity_field_options($type, $options = array(), $increment = 1) {
+function partial_date_granularity_field_options($type, $options = [], $increment = 1) {
   switch ($type) {
     case 'second':
     case 'minute':
-      $tmp = array(0, 15, 30, 45);
-      return $options + array_combine($tmp, $tmp); //date_minutes('i', FALSE, $increment);
+      $tmp = [0, 15, 30, 45];
+      // date_minutes('i', FALSE, $increment);.
+      return $options + array_combine($tmp, $tmp);
 
     case 'hour':
       return $options + array_combine(range(0, 23), range(0, 23));
@@ -185,14 +186,14 @@ function partial_date_granularity_field_options($type, $options = array(), $incr
 function partial_date_year_designation_decorator($year, $designation = 'ce') {
   static $designation_suffixes;
   if (empty($designation_suffixes)) {
-    $designation_suffixes = array(
+    $designation_suffixes = [
       'BC' => 'BC',
       'AD' => 'AD',
       'BCE' => 'BCE',
       'CE' => 'CE',
-    );
+    ];
     foreach ($designation_suffixes as $key => $designation_suffix) {
-      $designation_suffixes[$key] = t($designation_suffix, array(), array('context' => 'datetime'));
+      $designation_suffixes[$key] = t($designation_suffix, [], ['context' => 'datetime']);
     }
   }
 
@@ -222,7 +223,7 @@ function partial_date_year_designation_decorator($year, $designation = 'ce') {
  * Generates a numeric date string.
  */
 function partial_date_float(array $c) {
-  foreach (partial_date_components(array('timezone')) as $key => $label) {
+  foreach (partial_date_components(['timezone']) as $key => $label) {
     if (!isset($c[$key]) || !strlen($c[$key])) {
       $c[$key] = 0;
     }

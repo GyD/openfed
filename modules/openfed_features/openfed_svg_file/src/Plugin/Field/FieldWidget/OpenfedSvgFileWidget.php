@@ -91,7 +91,7 @@ class OpenfedSvgFileWidget extends FileWidget {
           'class' => ['openfed_svg_file_type'],
         ],
       ];
-      $element['field_content_wrapper']['output_type']['width'] = array(
+      $element['field_content_wrapper']['output_type']['width'] = [
         '#type' => 'number',
         '#title' => t('Width'),
         '#default_value' => isset($item['width']) ? $item['width'] : 100,
@@ -102,8 +102,8 @@ class OpenfedSvgFileWidget extends FileWidget {
         '#attributes' => [
           'class' => ['openfed_svg_file_width'],
         ],
-      );
-      $element['field_content_wrapper']['output_type']['height'] = array(
+      ];
+      $element['field_content_wrapper']['output_type']['height'] = [
         '#type' => 'number',
         '#title' => t('Height'),
         '#default_value' => isset($item['height']) ? $item['height'] : 100,
@@ -114,46 +114,46 @@ class OpenfedSvgFileWidget extends FileWidget {
         '#attributes' => [
           'class' => ['openfed_svg_file_height'],
         ],
-      );
-      $element['field_content_wrapper']['output_type']['title'] = array(
+      ];
+      $element['field_content_wrapper']['output_type']['title'] = [
         '#type' => 'textfield',
         '#title' => t('Title'),
         '#value' => isset($item['title']) ? $item['title'] : '',
         '#disabled' => TRUE,
-        '#states' => array(
-          'visible' => array(
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'iframe')],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'image')],
-          ),
-          'enabled' => array(
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'iframe')],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'image')],
-          ),
-          'required' => array(
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'iframe')],
-          ),
-        ),
-      );
-      $element['field_content_wrapper']['output_type']['alt'] = array(
+        '#states' => [
+          'visible' => [
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'iframe']],
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+          ],
+          'enabled' => [
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'iframe']],
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+          ],
+          'required' => [
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'iframe']],
+          ],
+        ],
+      ];
+      $element['field_content_wrapper']['output_type']['alt'] = [
         '#type' => 'textfield',
         '#title' => t('Alt'),
         '#value' => isset($item['alt']) ? $item['alt'] : '',
         '#disabled' => TRUE,
-        '#states' => array(
-          'visible' => array(
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'object')],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'image')],
-          ),
-          'enabled' => array(
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'object')],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'image')],
-          ),
-          'required' => array(
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'object')],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => array('value' => 'image')],
-          ),
-        ),
-      );
+        '#states' => [
+          'visible' => [
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'object']],
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+          ],
+          'enabled' => [
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'object']],
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+          ],
+          'required' => [
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'object']],
+            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+          ],
+        ],
+      ];
     }
 
     return parent::process($element, $form_state, $form);

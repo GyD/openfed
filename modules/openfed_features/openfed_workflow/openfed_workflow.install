@@ -32,9 +32,9 @@ function openfed_workflow_install() {
   // For content editors, we just need to add a new permission for Needs Review
   // new state.
   $editor_role_conf = 'user.role.content_editor';
-  $editor_new_permissions = array(
+  $editor_new_permissions = [
     'use openfed_workflow transition review',
-  );
+  ];
   $config = \Drupal::configFactory()->getEditable($editor_role_conf);
   $config->set(
     'permissions',
