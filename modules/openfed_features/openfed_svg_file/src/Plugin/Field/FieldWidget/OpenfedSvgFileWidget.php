@@ -9,7 +9,6 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Element\ManagedFile;
 use Drupal\file\Plugin\Field\FieldWidget\FileWidget;
 
-
 /**
  * Plugin implementation of the 'openfed_svg_file' widget.
  *
@@ -221,4 +220,5 @@ class OpenfedSvgFileWidget extends FileWidget {
     parent::extractFormValues($items, $form, $form_state);
 
   }
+
 }

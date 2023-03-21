@@ -169,7 +169,7 @@ function partial_date_granularity_field_options($type, $options = [], $increment
       return $options + DateTools::monthNames();
 
     case 'timezone':
-      // Ref: Date API module
+      // Ref: Date API module.
       return $options + system_time_zones();
 
     case 'year':
@@ -262,6 +262,7 @@ function _partial_date_component_separator_type($a, $b) {
   return $key;
 
 }
+
 /**
  * Helper function to determine the component type for inserting the component
  * separator.

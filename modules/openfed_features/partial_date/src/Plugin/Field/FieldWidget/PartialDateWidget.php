@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Drupal\partial_date\Plugin\Field\FieldWidget;
 

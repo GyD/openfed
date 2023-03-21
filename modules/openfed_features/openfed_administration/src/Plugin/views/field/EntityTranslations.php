@@ -117,7 +117,6 @@ class EntityTranslations extends FieldPluginBase {
       foreach ($language_options as $language_prefix => $value) {
         $language_name = $this->languageManager->getLanguageName($language_prefix);
         // Check if the entity has any translations to display.
-
         if ($entity->hasTranslation($language_prefix)) {
           $options = [
             'language' => $languages[$language_prefix],

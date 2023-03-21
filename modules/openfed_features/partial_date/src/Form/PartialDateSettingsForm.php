@@ -11,9 +11,9 @@ use Drupal\Core\Form\FormStateInterface;
  * @author CosminFr
  */
 class PartialDateSettingsForm extends ConfigFormBase {
-  
+
   CONST SETTINGS = 'partial_date.settings';
-  
+
   public function getFormId() {
     return 'partial_date_settings_form';
   }
@@ -40,7 +40,7 @@ class PartialDateSettingsForm extends ConfigFormBase {
 
     return parent::buildForm($form, $form_state);
   }
-  
+
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $config = $this->config(self::SETTINGS);
     // Save any changes.

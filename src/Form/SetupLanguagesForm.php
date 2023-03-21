@@ -11,6 +11,7 @@ use Drupal\language\Entity\ConfigurableLanguage;
  * Defines a form for selecting which languages to install.
  */
 class SetupLanguagesForm extends FormBase {
+
   /**
    * @inheritDoc
    */
@@ -90,8 +91,8 @@ class SetupLanguagesForm extends FormBase {
       $weight = 0;
       foreach ($regional_enabled as $index => $langcode) {
         $language = ConfigurableLanguage::load($langcode);
-        // Checking if the language is already installed. If so, we just update the
-        // weight.
+        // Checking if the language is already installed.
+        // If so, we just update the weight.
         if (empty($language)) {
           ConfigurableLanguage::createFromLangcode($langcode)
             ->setWeight($weight)
@@ -113,7 +114,7 @@ class SetupLanguagesForm extends FormBase {
     \Drupal::state()
       ->set('openfed_regional_list_chosen', array_filter($regional_enabled));
 
-    // Check cookie and language selection option
+    // Check cookie and language selection option.
     if (!empty($cookie_and_language_selection)) {
       // Enable language cookie and language seleciton page cookies.
       $module_list = [
@@ -135,4 +136,5 @@ class SetupLanguagesForm extends FormBase {
     }
 
   }
+
 }

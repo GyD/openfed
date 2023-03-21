@@ -37,7 +37,7 @@ class PartialDateElement extends FormElement {
       ),
     ];
   }
-  
+
   /**
    * Process callback.
    */

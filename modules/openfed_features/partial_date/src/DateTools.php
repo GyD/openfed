@@ -76,6 +76,7 @@ class DateTools {
    * Maps out the valid month ranges for a given year.
    *
    * @param int $year
+   *
    * @return array
    *   Note, there is no array index.
    */
@@ -234,19 +235,22 @@ class DateTools {
       case 12:
       case 13:
         return $suffixes['th'];
+
       default:
         switch ($day % 10) {
           case 1:
             return $suffixes['st'];
+
           case 2:
             return $suffixes['nd'];
+
           case 3:
             return $suffixes['rd'];
+
           default:
             return $suffixes['th'];
         }
     }
   }
-
 
 }

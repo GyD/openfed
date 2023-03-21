@@ -53,18 +53,18 @@ class PartialDateFormat extends ConfigEntityBase implements PartialDateFormatInt
    * @var string
    */
   protected $id;
-  
+
   /**
    * @var string
    */
   protected $meridiem = 'a';
-  
+
   /**
    * @var string
    * This controls how year designation is handled: 1BC = 1BCE = -1 and 1AD = 1CE = 1.
    */
   protected $year_designation = 'ce';
-  
+
   /**
    * @var array
    */

@@ -63,32 +63,36 @@ class CheckboxWithOptionsElement extends FormElement {
     ];
     return $element;
   }
- 
+
   /**
    * #element_validate callback.
    * {@inheritdoc}
    */
   public static function validateElement(&$element, FormStateInterface $form_state, &$complete_form) {
     $value = $element['#value'];
-    //The valueCallback function (below) does set the element's #value property
-    //BUT not to the $form_state leading to the setting value (for which the 
-    //element corresponds) to be not as expected.
-    //Thus setValueForElement is forced here. (in valueCallback would not have worked!)
+    // The valueCallback function (below) does set the element's #value property
+    // BUT not to the $form_state leading to the setting value (for which the
+    // element corresponds) to be not as expected.
+    // Thus setValueForElement is forced here. (in valueCallback would not have worked!)
     if (!empty($value)) {
-//      \Drupal::logger('partial_date')->debug('Setting result: ' . $value);
+      // \Drupal::logger('partial_date')->debug('Setting result: ' . $value);
       $form_state->setValueForElement($element, $value);
     }
   }
-  
+
+  /**
+   *
+   */
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
     if ($input === FALSE) {
       $element += ['#default_value' => ''];
       return $element['#default_value'];
     }
     if (empty($input['master'])) {
-      $cbValue = isset($element['#checkbox_value']) ? $element['#checkbox_value'] : FALSE;
+      $cbValue = $element['#checkbox_value'] ?? FALSE;
       return $cbValue;
-    } elseif (is_array($input['details']['options'])) {
+    }
+    elseif (is_array($input['details']['options'])) {
       $result = [];
       foreach ($input['details']['options'] as $key => $value) {
         if (isset($value) && $value != 0) {
@@ -101,5 +105,5 @@ class CheckboxWithOptionsElement extends FormElement {
     }
     return NULL;
   }
-  
+
 }

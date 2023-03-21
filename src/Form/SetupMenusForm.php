@@ -9,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
  * Defines a form for selecting which languages to install.
  */
 class SetupMenusForm extends FormBase {
+
   /**
    * @inheritDoc
    */
@@ -88,10 +89,14 @@ class SetupMenusForm extends FormBase {
   /**
    * Create a custom menu.
    *
-   * @param string $menu_name The unique name of the custom menu.
-   * @param string $title The human readable menu title.
-   * @param string $description The custom menu description.
-   * @param string $language The language code for the menu item.
+   * @param string $menu_name
+   *   The unique name of the custom menu.
+   * @param string $title
+   *   The human-readable menu title.
+   * @param string $description
+   *   The custom menu description.
+   * @param string $language
+   *   The language code for the menu item.
    */
   private function _openfed_create_custom_menu($menu_name, $title, $description = '', $language = 'en') {
     $menu = [];

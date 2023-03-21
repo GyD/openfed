@@ -138,7 +138,7 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
         $value = '12';
       }
     }
-    // Add suffixes for year and time formats
+    // Add suffixes for year and time formats.
     $suffix = '';
     switch ($keyFormat) {
       case 'd-S':
@@ -217,26 +217,25 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
         catch (\Exception $e) {}
         return '';
 
-
-      // Todo: implement
+      // @todo implement
       // Year types
-      // ISO-8601 year number
+      // ISO-8601 year number.
       case 'o':
 
         // Day types
-        // The day of the year
+        // The day of the year.
       case 'z':
-        // ISO-8601 numeric representation of the day of the week
+        // ISO-8601 numeric representation of the day of the week.
       case 'N':
 
         // Timezone offsets
-        // Whether or not the date is in daylight saving time
+        // Whether or not the date is in daylight saving time.
       case 'I':
-        // Difference to Greenwich time (GMT) in hours
+        // Difference to Greenwich time (GMT) in hours.
       case 'O':
-        // Difference to Greenwich time (GMT) with colon between hours and minutes
+        // Difference to Greenwich time (GMT) with colon between hours and minutes.
       case 'P':
-        // Timezone offset in seconds
+        // Timezone offset in seconds.
       case 'Z':
 
       default:
