@@ -12,7 +12,7 @@ use Drupal\views\ResultRow;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Field handler for showing links to translations available for a entity.
+ * Field handler for showing links to translations available for an entity.
  *
  * @ingroup views_field_handlers
  *

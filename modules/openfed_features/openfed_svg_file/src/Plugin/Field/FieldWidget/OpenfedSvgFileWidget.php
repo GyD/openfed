@@ -81,7 +81,7 @@ class OpenfedSvgFileWidget extends FileWidget {
       $element['field_content_wrapper']['output_type']['type'] = [
         '#type' => 'radios',
         '#title' => t('Output type'),
-        '#default_value' => isset($item['type']) ? $item['type'] : 'image',
+        '#default_value' => $item['type'] ?? 'image',
         '#options' => get_output_types(),
         '#required' => TRUE,
         '#attributes' => [
@@ -91,7 +91,7 @@ class OpenfedSvgFileWidget extends FileWidget {
       $element['field_content_wrapper']['output_type']['width'] = [
         '#type' => 'number',
         '#title' => t('Width'),
-        '#default_value' => isset($item['width']) ? $item['width'] : 100,
+        '#default_value' => $item['width'] ?? 100,
         '#field_suffix' => 'px',
         '#size' => 4,
         '#min' => 1,
@@ -103,7 +103,7 @@ class OpenfedSvgFileWidget extends FileWidget {
       $element['field_content_wrapper']['output_type']['height'] = [
         '#type' => 'number',
         '#title' => t('Height'),
-        '#default_value' => isset($item['height']) ? $item['height'] : 100,
+        '#default_value' => $item['height'] ?? 100,
         '#field_suffix' => 'px',
         '#size' => 4,
         '#min' => 1,
@@ -115,7 +115,7 @@ class OpenfedSvgFileWidget extends FileWidget {
       $element['field_content_wrapper']['output_type']['title'] = [
         '#type' => 'textfield',
         '#title' => t('Title'),
-        '#value' => isset($item['title']) ? $item['title'] : '',
+        '#value' => $item['title'] ?? '',
         '#disabled' => TRUE,
         '#states' => [
           'visible' => [
@@ -134,7 +134,7 @@ class OpenfedSvgFileWidget extends FileWidget {
       $element['field_content_wrapper']['output_type']['alt'] = [
         '#type' => 'textfield',
         '#title' => t('Alt'),
-        '#value' => isset($item['alt']) ? $item['alt'] : '',
+        '#value' => $item['alt'] ?? '',
         '#disabled' => TRUE,
         '#states' => [
           'visible' => [

@@ -30,11 +30,16 @@ class CheckboxWithOptionsElement extends FormElement {
   /**
    * Process callback.
    */
-  public static function processElement(&$element) {          //extra params available: FormStateInterface $form_state, &$complete_form) {
-    $options = isset($element['#options']) ? $element['#options'] : array();
-    $optionType = isset($element['#option_type']) ? $element['#option_type'] : 'radios'; 
-    $cbValue = isset($element['#checkbox_value']) ? $element['#checkbox_value'] : '1'; 
-    $defaultValue = isset($element['#default_value']) ? $element['#default_value'] : $cbValue; 
+
+  /**
+   * Extra params available: FormStateInterface $form_state, &$complete_form) {.
+   */
+  public static function processElement(&$element) {
+
+    $options = $element['#options'] ?? [];
+    $optionType = $element['#option_type'] ?? 'radios';
+    $cbValue = $element['#checkbox_value'] ?? '1';
+    $defaultValue = $element['#default_value'] ?? $cbValue;
     unset($options[$cbValue]);
     //Using "master" checkbox instead of the title!
     $element['#title_display'] = 'invisible';
