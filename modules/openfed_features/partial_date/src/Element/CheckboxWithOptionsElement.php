@@ -23,7 +23,7 @@ class CheckboxWithOptionsElement extends FormElement {
       '#process' => [[$class, 'processElement']],
       '#element_validate' => [[$class, 'validateElement']],
       '#theme' => 'checkbox_with_options',
-      '#theme_wrappers' => array('form_element'),
+      '#theme_wrappers' => ['form_element'],
     ];
   }
   
@@ -38,29 +38,29 @@ class CheckboxWithOptionsElement extends FormElement {
     unset($options[$cbValue]);
     //Using "master" checkbox instead of the title!
     $element['#title_display'] = 'invisible';
-    $element['master'] = array(
+    $element['master'] = [
       '#type' => 'checkbox',
       '#id' => 'master_checkbox',
       '#title' => '<b>' . $element['#title'] . '</b>',
       '#default_value' => ($cbValue != $defaultValue),
-//      '#value' => $cbValue,
-    );
-    //#states property not working for radios element. must add a container to show/hide details.
-    $element['details'] = array(
+    // '#value' => $cbValue,
+    ];
+    // #states property not working for radios element. must add a container to show/hide details.
+    $element['details'] = [
       '#type' => 'container',
-      '#states' => array(
-        'visible' => array(
-          ':input[id="master_checkbox"]' => array('checked' => TRUE),
-        ),
-      ),
+      '#states' => [
+        'visible' => [
+          ':input[id="master_checkbox"]' => ['checked' => TRUE],
+        ],
+      ],
       '#prefix' => '<div style="margin-left:25px">',
       '#sufix' => '</div>',
-    );
-    $element['details']['options'] = array(
+    ];
+    $element['details']['options'] = [
       '#type' => $optionType,
       '#options' => $options,
       '#default_value' => ($cbValue != $defaultValue) ? $defaultValue : NULL,
-    );
+    ];
     return $element;
   }
  
@@ -82,14 +82,14 @@ class CheckboxWithOptionsElement extends FormElement {
   
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
     if ($input === FALSE) {
-      $element += array('#default_value' => '');
+      $element += ['#default_value' => ''];
       return $element['#default_value'];
     }
     if (empty($input['master'])) {
-      $cbValue = isset($element['#checkbox_value']) ? $element['#checkbox_value'] : FALSE; 
+      $cbValue = isset($element['#checkbox_value']) ? $element['#checkbox_value'] : FALSE;
       return $cbValue;
     } elseif (is_array($input['details']['options'])) {
-      $result = array();
+      $result = [];
       foreach ($input['details']['options'] as $key => $value) {
         if (isset($value) && $value != 0) {
           $result[$key] = $value;

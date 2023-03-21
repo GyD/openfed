@@ -56,7 +56,7 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
             $start = $this->formatComponent($type, [$type => $estimate_start] + $date, $format);
             $end = $this->formatComponent($type, [$type => $estimate_end], $format);
             if (strlen($start) && strlen($end)) {
-              $markup = t('@estimate_start to @estimate_end', array('@estimate_start' => $estimate_start, '@estimate_end' => $estimate_end));
+              $markup = t('@estimate_start to @estimate_end', ['@estimate_start' => $estimate_start, '@estimate_end' => $estimate_end]);
             }
             elseif (strlen($estimate_start)) {
               $markup = $estimate_start;

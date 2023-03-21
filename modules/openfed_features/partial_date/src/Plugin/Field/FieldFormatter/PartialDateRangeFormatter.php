@@ -25,9 +25,9 @@ class PartialDateRangeFormatter extends PartialDateFormatter {
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return parent::defaultSettings() + array(
+    return parent::defaultSettings() + [
       'range_reduce' => TRUE,
-    );
+    ];
   }
 
   /**
@@ -36,12 +36,12 @@ class PartialDateRangeFormatter extends PartialDateFormatter {
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $elements = parent::settingsForm($form, $form_state);
 
-    $elements['range_reduce'] = array(
+    $elements['range_reduce'] = [
       '#type' => 'checkbox',
       '#title' => t('Reduce common values from range display'),
       '#default_value' => $this->getSetting('range_reduce'),
       '#description' => t('This setting allows a simplified display for range values. For example "2015 Jan-Sep" instead of full specification "2015 Jan-2015 Sep"'),
-    );
+    ];
     return $elements;
   }
 
@@ -53,7 +53,7 @@ class PartialDateRangeFormatter extends PartialDateFormatter {
     foreach ($items as $delta => $item) {
       $override = $this->getTextOverride($item);
       if ($override) {
-        $element[$delta] = array('#markup' => $override);
+        $element[$delta] = ['#markup' => $override];
       }
       else {
         $from = $item->from;

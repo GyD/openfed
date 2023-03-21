@@ -91,27 +91,27 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return array(
+    return [
       'use_override' => 'none',
       'format' => 'short',
-    ) + parent::defaultSettings();
+    ] + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
-    $elements = array();
+    $elements = [];
 
-    $elements['use_override'] = array(
+    $elements['use_override'] = [
       '#type' => 'checkbox_with_options',
       '#title' => t('Use date descriptions (if available)'),
       '#default_value' => $this->getSetting('use_override'),
       '#options' => $this->overrideOptions(),
       '#checkbox_value' => 'none',
       '#description' => t('This setting allows date values to be replaced with user specified date descriptions, if applicable.'),
-    );
-    $elements['format'] = array(
+    ];
+    $elements['format'] = [
       '#title' => t('Partial date format'),
       '#type' => 'select',
       '#default_value' => $this->getSetting('format'),
@@ -123,8 +123,8 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
 //      ),
       '#description' => t('You can use any of the predefined partial date formats. '
           . 'Or, you can configure partial date formats <a href=":config">here</a>.',
-          array(':config' => '/admin/config/regional/partial-date-formats')),
-    );
+          [':config' => '/admin/config/regional/partial-date-formats']),
+    ];
 
     return $elements;
   }
@@ -133,33 +133,33 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $summary = array();
+    $summary = [];
 
     if ($this->getSetting('use_override') != 'none') {
       $overrides = $this->overrideOptions();
       $summary[] = t(' User text: ') . $overrides[$this->getSetting('use_override')];
     }
 
-    $types   = $this->formatOptions();
-    $example = $this->dateFormatter->format($this->generateExampleDate(), $this->getFormat());
-    $summary[] = array('#markup' => t('Format: ') . $types[$this->getSetting('format')] . ' - ' . $example);
+    $types     = $this->formatOptions();
+    $example   = $this->dateFormatter->format($this->generateExampleDate(), $this->getFormat());
+    $summary[] = ['#markup' => t('Format: ') . $types[$this->getSetting('format')] . ' - ' . $example];
 
     return $summary;
   }
 
   protected function overrideOptions() {
-    return array(
-      'none' => t('Use date only', array(), array('context' => 'datetime')),
-      'short' => t('Use short description', array(), array('context' => 'datetime')),
-      'long' => t('Use long description', array(), array('context' => 'datetime')),
-      'long_short' => t('Use long or short description', array(), array('context' => 'datetime')),
-      'short_long' => t('Use short or long description', array(), array('context' => 'datetime')),
-    );
+    return [
+      'none' => t('Use date only', [], ['context' => 'datetime']),
+      'short' => t('Use short description', [], ['context' => 'datetime']),
+      'long' => t('Use long description', [], ['context' => 'datetime']),
+      'long_short' => t('Use long or short description', [], ['context' => 'datetime']),
+      'short_long' => t('Use short or long description', [], ['context' => 'datetime']),
+    ];
   }
 
   protected function formatOptions() {
     $formats = $this->partialDateFormatStorage->loadMultiple();
-    $options = array();
+    $options = [];
     foreach($formats as $key => $format) {
       $options[$key] = $format->label();
     }
@@ -174,7 +174,7 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
     foreach ($items as $delta => $item) {
       $override = $this->getTextOverride($item);
       if ($override) {
-        $element[$delta] = array('#markup' => $override);
+        $element[$delta] = ['#markup' => $override];
       }
       else {
         $from = $item->from;

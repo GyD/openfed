@@ -27,149 +27,158 @@ class PartialDateFormatEditForm extends EntityForm {
     $elements = parent::form($form, $form_state);
     $format   = $this->entity;
 
-    $elements['label'] = array(
+    $elements['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
       '#default_value' => $format->label(),
       '#description' => $this->t('Label for the partial date format.'),
       '#required' => TRUE,
-    );
-    $elements['id'] = array(
+    ];
+    $elements['id'] = [
       '#type' => 'machine_name',
       '#default_value' => $format->id(),
-      '#machine_name' => array(
-        'exists' => array(get_class($format), 'load'),
-      ),
+      '#machine_name' => [
+        'exists' => [get_class($format), 'load'],
+      ],
       '#disabled' => !$format->isNew(),
-    );
+    ];
 
     // Additional custom properties.
-    $elements['meridiem'] = array(
+    $elements['meridiem']         = [
       '#type' => 'radios',
       '#title' => $this->t('Ante meridiem and Post meridiem format'),
-      '#options' => array(
+      '#options' => [
         'a' => $this->t('Lowercase (am or pm)'),
-        'A' => $this->t('Uppercase (AM or PM)')
-      ),
+        'A' => $this->t('Uppercase (AM or PM)'),
+      ],
       '#default_value' => $format->getMeridiem(),
-    );
-    $elements['year_designation'] = array(
+    ];
+    $elements['year_designation'] = [
       '#type' => 'radios',
       '#title' => $this->t('Year designation format'),
       '#default_value' => $format->getYearDesignation(),
-      '#options' => array(
-        'sign' => $this->t('Negative sign (-)', array(), array('context' => 'datetime')),
-        'ad' => $this->t('Anno Domini (BC/AD)', array(), array('context' => 'datetime')),
-        'bc' => $this->t('Anno Domini (BC only)', array(), array('context' => 'datetime')),
-        'ce' => $this->t('Common Era (BCE/CE)', array(), array('context' => 'datetime')),
-        'bce' => $this->t('Common Era (BCE only)', array(), array('context' => 'datetime'))
-      ),
+      '#options' => [
+        'sign' => $this->t('Negative sign (-)', [], ['context' => 'datetime']),
+        'ad' => $this->t('Anno Domini (BC/AD)', [], ['context' => 'datetime']),
+        'bc' => $this->t('Anno Domini (BC only)', [], ['context' => 'datetime']),
+        'ce' => $this->t('Common Era (BCE/CE)', [], ['context' => 'datetime']),
+        'bce' => $this->t('Common Era (BCE only)', [], ['context' => 'datetime']),
+      ],
       '#required' => TRUE,
       '#description' => $this->t('This controls how year designation is handled: 1BC = 1BCE = -1 and 1AD = 1CE = 1.'),
-    );
-    $components = partial_date_components();
-    $elements['display']   = $this->buildDisplayElements($components, $format);
-    $elements['separator'] = $this->buildSeparatorElements($format);
+    ];
+    $components                   = partial_date_components();
+    $elements['display']          = $this->buildDisplayElements($components, $format);
+    $elements['separator']        = $this->buildSeparatorElements($format);
 
-    $custom = array('c1' => $this->t('Custom component 1'), 'c2' => $this->t('Custom component 2'), 'c3' => $this->t('Custom component 3'), 'approx' => $this->t('Approximation text'));
+    $custom = ['c1' => $this->t('Custom component 1'), 'c2' => $this->t('Custom component 2'), 'c3' => $this->t('Custom component 3'), 'approx' => $this->t('Approximation text')];
     $elements['components'] = $this->buildComponentsTable($components + $custom, $format);
 
     return $elements;
   }
 
+  /**
+   *
+   */
   private function buildDisplayElements($components, PartialDateFormatInterface $format) {
-    $elements = array(
+    $elements = [
       '#type' => 'details',
       '#title' => $this->t('Component display'),
       '#tree' => TRUE,
-    );
+    ];
 
     foreach ($components as $key => $label) {
-      $elements[$key] = array(
+      $elements[$key] = [
         '#type' => 'select',
-        '#title' => t('Display source for %label', array('%label' => $label)),
+        '#title' => t('Display source for %label', ['%label' => $label]),
         '#options' => $this->partial_date_estimate_handling_options(),
         '#default_value' => $format->getDisplay($key),
         '#required' => TRUE,
-      );
+      ];
     }
     return $elements;
   }
 
+  /**
+   *
+   */
   private function buildSeparatorElements(PartialDateFormatInterface $format) {
-    $elements = array(
+    $elements = [
       '#type' => 'details',
       '#title' => $this->t('Component separators'),
       '#tree' => TRUE,
-    );
-    $elements['date'] = array(
+    ];
+    $elements['date'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Date separators'),
       '#maxlength' => 15,
       '#size' => 8,
       '#default_value' => $format->getSeparator('date'),
       '#description' => $this->t('This separator is used within date part. Empty value is allowed (ex. 20151231). Add spaces if you needed between the separator and the date values.'),
-    );
-    $elements['time'] = array(
+    ];
+    $elements['time'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Time separators'),
       '#maxlength' => 15,
       '#size' => 8,
       '#default_value' => $format->getSeparator('time'),
       '#description' => $this->t('This separator is used within time component. Empty value is allowed. Add spaces if needed.'),
-    );
-    $elements['datetime'] = array(
+    ];
+    $elements['datetime'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Date and time separators'),
       '#size' => 8,
       '#maxlength' => 15,
       '#default_value' => $format->getSeparator('datetime'),
       '#description' => $this->t('This separator is used between date and time components. '),
-      '#attributes' => array('class' => array('field--label-inline')),
-    );
-    $elements['other'] = array(
+      '#attributes' => ['class' => ['field--label-inline']],
+    ];
+    $elements['other'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Other separators'),
       '#size' => 8,
       '#maxlength' => 15,
       '#default_value' => $format->getSeparator('other'),
       '#description' => $this->t('This separator may be used with year estimations. TODO add better description or deprecate.'),
-      '#attributes' => array('class' => array('field--label-inline')),
-    );
-    $elements['range'] = array(
+      '#attributes' => ['class' => ['field--label-inline']],
+    ];
+    $elements['range'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Range separator'),
       '#size' => 8,
       '#maxlength' => 15,
       '#default_value' => $format->getSeparator('range'),
       '#description' => $this->t('This separator is used to seperate date components in the range element. Add spaces if you need spaces between the separator and the date values.'),
-      '#attributes' => array('class' => array('field--label-inline')),
-    );
+      '#attributes' => ['class' => ['field--label-inline']],
+    ];
     return $elements;
   }
 
+  /**
+   *
+   */
   private function buildComponentsTable($components, PartialDateFormatInterface $format) {
-    $table = array(
+    $table = [
       '#type' => 'table',
-      '#header' => array(
+      '#header' => [
         'label' => $this->t('Component'),
         'value' => $this->t('Value format'),
         'empty' => $this->t('Value empty text'),
         'weight' => $this->t('Weight'),
-      ),
+      ],
       '#empty' => $this->t('This should not be empty. Try re-installing Partial Date module.'),
       '#tableselect' => FALSE,
       // The weight column is currently not hidden due to the colspan usage.
       // See https://www.drupal.org/node/997370.
-      '#tabledrag' => array(
-        array(
+      '#tabledrag' => [
+        [
           'action' => 'order',
           'relationship' => 'sibling',
           'group' => 'partial-date-format-order-weight',
-        )
-      )
-    );
+        ],
+      ],
+    ];
 
     // Build the table rows and columns.
     foreach ($format->getComponents() as $key => $component) {
@@ -178,45 +187,45 @@ class PartialDateFormatEditForm extends EntityForm {
       $table[$key]['#weight'] = $component['weight'];
       $table[$key]['label']['#plain_text'] = $label;
 
-      if (in_array($key, array('c1', 'c2', 'c3', 'approx'))) {
-        $table[$key]['value'] = array(
+      if (in_array($key, ['c1', 'c2', 'c3', 'approx'])) {
+        $table[$key]['value'] = [
           '#type' => 'textfield',
           '#title' => $label,
           '#title_display' => 'invisible',
           '#default_value' => $component['value'],
-          '#wrapper_attributes' => array('colspan' => 2),
-        );
+          '#wrapper_attributes' => ['colspan' => 2],
+        ];
         if ($key == 'approx') {
           $table[$key]['value']['#description'] = $this->t('Only shows if the date is flagged as approximate.');
         }
       }
       else {
-        $table[$key]['format'] = array(
+        $table[$key]['format'] = [
           '#type' => 'radios',
-          '#title' => $this->t('Format for %label', array('%label' => $label)),
+          '#title' => $this->t('Format for %label', ['%label' => $label]),
           '#title_display' => 'invisible',
           '#options' => $this->getComponentOptions($key),
           '#default_value' => $component['format'],
           '#required' => TRUE,
-        );
+        ];
 
-        $table[$key]['empty'] = array(
+        $table[$key]['empty'] = [
           '#type' => 'textfield',
-          '#title' => $this->t('Empty text for %label', array('%label' => $label)),
+          '#title' => $this->t('Empty text for %label', ['%label' => $label]),
           '#title_display' => 'invisible',
           '#default_value' => $component['empty'],
           '#size' => 8,
-        );
+        ];
       }
 
-      $table[$key]['weight'] = array(
+      $table[$key]['weight'] = [
         '#type' => 'weight',
-        '#title' => $this->t('Weight for %label', array('%label' => $label)),
+        '#title' => $this->t('Weight for %label', ['%label' => $label]),
         '#title_display' => 'invisible',
         '#default_value' => $component['weight'],
-        '#attributes' => array('class' => array('partial-date-format-order-weight')),
+        '#attributes' => ['class' => ['partial-date-format-order-weight']],
         '#required' => TRUE,
-      );
+      ];
     }
 
     return $table;
@@ -226,58 +235,58 @@ class PartialDateFormatEditForm extends EntityForm {
     switch ($component) {
 
       case 'year':
-        return array(
-          'Y' => $this->t('A full numeric representation of a year. Eg: -125, 2003', array(), array('context' => 'datetime')),
-          'y' => $this->t('A two digit representation of a year. Eg: -25, 03', array(), array('context' => 'datetime')),
-          'Y-ce' => $this->t('A full numeric representation of a year with year designation. Eg: 125BC, 125BCE or -125', array(), array('context' => 'datetime')),
-          'y-ce' => $this->t('A two digit representation of a year with year designation. Eg: 25BC, 25BCE or -25', array(), array('context' => 'datetime')),
-        );
+        return [
+          'Y' => $this->t('A full numeric representation of a year. Eg: -125, 2003', [], ['context' => 'datetime']),
+          'y' => $this->t('A two digit representation of a year. Eg: -25, 03', [], ['context' => 'datetime']),
+          'Y-ce' => $this->t('A full numeric representation of a year with year designation. Eg: 125BC, 125BCE or -125', [], ['context' => 'datetime']),
+          'y-ce' => $this->t('A two digit representation of a year with year designation. Eg: 25BC, 25BCE or -25', [], ['context' => 'datetime']),
+        ];
 
       case 'month':
-        return array(
-          'F' => $this->t('A full textual representation of a month, January through December.', array(), array('context' => 'datetime')),
-          'm' => $this->t('Numeric representation of a month, with leading zeros, 01 through 12', array(), array('context' => 'datetime')),
-          'M' => $this->t('A short textual representation of a month, three letters, Jan through Dec.', array(), array('context' => 'datetime')),
-          'n' => $this->t('Numeric representation of a month, without leading zeros, 1 through 12', array(), array('context' => 'datetime')),
-        );
+        return [
+          'F' => $this->t('A full textual representation of a month, January through December.', [], ['context' => 'datetime']),
+          'm' => $this->t('Numeric representation of a month, with leading zeros, 01 through 12', [], ['context' => 'datetime']),
+          'M' => $this->t('A short textual representation of a month, three letters, Jan through Dec.', [], ['context' => 'datetime']),
+          'n' => $this->t('Numeric representation of a month, without leading zeros, 1 through 12', [], ['context' => 'datetime']),
+        ];
 
       case 'day':
-        return array(
-          'd' => $this->t('Day of the month, 2 digits with leading zeros, 01 through 31', array(), array('context' => 'datetime')),
-          'j' => $this->t('Day of the month without leading zeros, 1 through 31.', array(), array('context' => 'datetime')),
-          'd-S' => $this->t('Day of the month, 2 digits with leading zeros with English ordinal suffix.', array(), array('context' => 'datetime')),
-          'j-S' => $this->t('Day of the month without leading zeros with English ordinal suffix.', array(), array('context' => 'datetime')),
-          'l' => $this->t('A full textual representation of the day of the week.', array(), array('context' => 'datetime')),
-          'D' => $this->t('A textual representation of a day, three letters.', array(), array('context' => 'datetime')),
-          'w' => $this->t('Numeric representation of the day of the week  0 (for Sunday) through 6 (for Saturday).', array(), array('context' => 'datetime')),
-        );
+        return [
+          'd' => $this->t('Day of the month, 2 digits with leading zeros, 01 through 31', [], ['context' => 'datetime']),
+          'j' => $this->t('Day of the month without leading zeros, 1 through 31.', [], ['context' => 'datetime']),
+          'd-S' => $this->t('Day of the month, 2 digits with leading zeros with English ordinal suffix.', [], ['context' => 'datetime']),
+          'j-S' => $this->t('Day of the month without leading zeros with English ordinal suffix.', [], ['context' => 'datetime']),
+          'l' => $this->t('A full textual representation of the day of the week.', [], ['context' => 'datetime']),
+          'D' => $this->t('A textual representation of a day, three letters.', [], ['context' => 'datetime']),
+          'w' => $this->t('Numeric representation of the day of the week  0 (for Sunday) through 6 (for Saturday).', [], ['context' => 'datetime']),
+        ];
 
       case 'hour':
-        return array(
-          'g' => $this->t('12-hour format of an hour without leading zeros, 1 through 12.', array(), array('context' => 'datetime')),
-          'G' => $this->t('24-hour format of an hour without leading zeros, 0 through 23.', array(), array('context' => 'datetime')),
-          'h' => $this->t('12-hour format of an hour with leading zeros, 01 through 12.', array(), array('context' => 'datetime')),
-          'H' => $this->t('24-hour format of an hour with leading zeros, 00 through 23.', array(), array('context' => 'datetime')),
-        );
+        return [
+          'g' => $this->t('12-hour format of an hour without leading zeros, 1 through 12.', [], ['context' => 'datetime']),
+          'G' => $this->t('24-hour format of an hour without leading zeros, 0 through 23.', [], ['context' => 'datetime']),
+          'h' => $this->t('12-hour format of an hour with leading zeros, 01 through 12.', [], ['context' => 'datetime']),
+          'H' => $this->t('24-hour format of an hour with leading zeros, 00 through 23.', [], ['context' => 'datetime']),
+        ];
 
       case 'minute':
-        return array(
-          'i' => $this->t('Minutes with leading zeros, 00 through 59.', array(), array('context' => 'datetime')),
-        );
+        return [
+          'i' => $this->t('Minutes with leading zeros, 00 through 59.', [], ['context' => 'datetime']),
+        ];
 
       case 'second':
-        return array(
-          's' => $this->t('Seconds, with leading zeros, 00 through 59.', array(), array('context' => 'datetime')),
-        );
+        return [
+          's' => $this->t('Seconds, with leading zeros, 00 through 59.', [], ['context' => 'datetime']),
+        ];
 
       case 'timezone':
-        return array(
-          'e' => $this->t('Timezone identifier. Eg: UTC, GMT, Atlantic/Azores.', array(), array('context' => 'datetime')),
-          'T' => $this->t('Timezone abbreviation. Eg: EST, MDT', array(), array('context' => 'datetime')),
-        );
+        return [
+          'e' => $this->t('Timezone identifier. Eg: UTC, GMT, Atlantic/Azores.', [], ['context' => 'datetime']),
+          'T' => $this->t('Timezone abbreviation. Eg: EST, MDT', [], ['context' => 'datetime']),
+        ];
 
       default:
-        return array();
+        return [];
     }
   }
 
@@ -288,28 +297,28 @@ class PartialDateFormatEditForm extends EntityForm {
     $status = parent::save($form, $form_state);
 
     if ($status) {
-      $this->messenger->addMessage($this->t('Saved the %label format.', array(
+      $this->messenger->addMessage($this->t('Saved the %label format.', [
         '%label' => $this->entity->label(),
-      )));
+      ]));
     }
     else {
-      $this->messenger->addMessage($this->t('The %label format was not saved.', array(
+      $this->messenger->addMessage($this->t('The %label format was not saved.', [
         '%label' => $this->entity->label(),
-      )));
+      ]));
     }
 
     $form_state->setRedirect('entity.partial_date_format.collection');
   }
 
   public function partial_date_estimate_handling_options() {
-    return array(
-      'none' => t('Hide', array(), array('context' => 'datetime')),
-      'estimate_label' => t('Estimate label', array(), array('context' => 'datetime')),
-      'estimate_range' => t('Estimate range', array(), array('context' => 'datetime')),
-      'estimate_component' => t('Start (single or from dates) or End (to dates) of estimate range', array(), array('context' => 'datetime')),
-      'date_only' => t('Date component if set', array(), array('context' => 'datetime')),
-      'date_or' => t('Date component with fallback to estimate component', array(), array('context' => 'datetime')),
-    );
+    return [
+      'none' => t('Hide', [], ['context' => 'datetime']),
+      'estimate_label' => t('Estimate label', [], ['context' => 'datetime']),
+      'estimate_range' => t('Estimate range', [], ['context' => 'datetime']),
+      'estimate_component' => t('Start (single or from dates) or End (to dates) of estimate range', [], ['context' => 'datetime']),
+      'date_only' => t('Date component if set', [], ['context' => 'datetime']),
+      'date_or' => t('Date component with fallback to estimate component', [], ['context' => 'datetime']),
+    ];
   }
 
 }

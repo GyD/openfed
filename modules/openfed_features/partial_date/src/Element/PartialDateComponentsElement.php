@@ -21,20 +21,20 @@ class PartialDateComponentsElement extends FormElement {
       '#input' => TRUE,
       '#process' => [[get_class($this), 'process']],
       '#tree' => TRUE,
-      '#theme_wrappers' => array(
-        'container' => array(
-          '#attributes' => array(
-            'class' => array('partial-date-element', 'clearfix', 'container-inline'),
-          ),
-        ),
+      '#theme_wrappers' => [
+        'container' => [
+          '#attributes' => [
+            'class' => ['partial-date-element', 'clearfix', 'container-inline'],
+          ],
+        ],
         'form_element',
-      ),
+      ],
       '#options' => partial_date_components(['timezone']),
       '#show_time' => TRUE,
       '#time_states' => FALSE,
     ];
   }
-  
+
   /**
    * Process callback.
    */
@@ -43,11 +43,11 @@ class PartialDateComponentsElement extends FormElement {
       unset($element['#options']['hour'], $element['#options']['minute'], $element['#options']['second']);
     }
     foreach ($element['#options'] as $key => $label) {
-      $element[$key] = array(
+      $element[$key] = [
         '#type' => 'checkbox',
         '#title' => $label,
         '#value' => in_array($key, $element['#value'], TRUE),
-      );
+      ];
       if ($element['#time_states'] && _partial_date_component_type($key) == 'time') {
         $element[$key]['#states'] = $element['#time_states'];
       }
@@ -56,9 +56,9 @@ class PartialDateComponentsElement extends FormElement {
   }
 
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
-    $result = array();
+    $result = [];
     if ($input === FALSE) {
-      $element += array('#default_value' => array());
+      $element += ['#default_value' => []];
       $result = $element['#default_value'];
     }
     elseif (is_array($input)) {

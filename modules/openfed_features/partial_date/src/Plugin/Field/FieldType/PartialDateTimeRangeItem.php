@@ -195,30 +195,30 @@ class PartialDateTimeRangeItem extends PartialDateTimeItem {
     $elements = parent::storageSettingsForm($form, $form_state, $has_data);
     $minimum_components = $this->getSetting('minimum_components');
     foreach (partial_date_components() as $key => $label) {
-      $elements['minimum_components']['from']['granularity'][$key]['#title'] = t('From @date_component', array('@date_component' => $label));
+      $elements['minimum_components']['from']['granularity'][$key]['#title'] = t('From @date_component', ['@date_component' => $label]);
     }
-    foreach (partial_date_components(array('timezone')) as $key => $label) {
-      $elements['minimum_components']['from']['estimates'][$key]['#title'] = t('From Estimate @date_component', array('@date_component' => $label));
+    foreach (partial_date_components(['timezone']) as $key => $label) {
+      $elements['minimum_components']['from']['estimates'][$key]['#title'] = t('From Estimate @date_component', ['@date_component' => $label]);
     }
     foreach (partial_date_components() as $key => $label) {
-      $elements['minimum_components']['to']['granularity'][$key] = array(
+      $elements['minimum_components']['to']['granularity'][$key] = [
         '#type' => 'checkbox',
-        '#title' => t('To @date_component', array('@date_component' => $label)),
+        '#title' => t('To @date_component', ['@date_component' => $label]),
         '#default_value' => $minimum_components['to']['granularity'][$key],
-      );
+      ];
     }
-    foreach (partial_date_components(array('timezone')) as $key => $label) {
-      $elements['minimum_components']['to']['estimates'][$key] = array(
+    foreach (partial_date_components(['timezone']) as $key => $label) {
+      $elements['minimum_components']['to']['estimates'][$key] = [
         '#type' => 'checkbox',
-        '#title' => t('To Estimate @date_component', array('@date_component' => $label)),
+        '#title' => t('To Estimate @date_component', ['@date_component' => $label]),
         '#default_value' => $minimum_components['to']['estimates'][$key],
-      );
+      ];
       if (_partial_date_component_type($key) === 'time') {
-        $element['minimum_components']['to']['estimates'][$key] = array(
-          'visible' => array(
-            ':input[id="has_time"]' => array('checked' => TRUE),
-          ),
-        );
+        $element['minimum_components']['to']['estimates'][$key] = [
+          'visible' => [
+            ':input[id="has_time"]' => ['checked' => TRUE],
+          ],
+        ];
       }
     }
     return $elements;

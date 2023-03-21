@@ -27,16 +27,16 @@ class PartialDateSettingsForm extends ConfigFormBase {
 
     //Only show setting you actually want users to edit
     //TODO: these are just for demo, probably should not be modified by users
-    $form['txt_inline_styles'] = array(
+    $form['txt_inline_styles'] = [
       '#type' => 'textfield',
       '#title' => 'Text inline styles',
       '#default_value' => $config->get('partial_date_component_field_txt_inline_styles'),
-    );
-    $form['inline_styles'] = array(
+    ];
+    $form['inline_styles'] = [
       '#type' => 'textfield',
       '#title' => 'Inline styles',
       '#default_value' => $config->get('partial_date_component_field_inline_styles'),
-    );
+    ];
 
     return parent::buildForm($form, $form_state);
   }

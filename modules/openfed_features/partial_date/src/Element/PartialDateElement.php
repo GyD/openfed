@@ -26,13 +26,13 @@ class PartialDateElement extends FormElement {
 //        '#estimates' => FALSE,
 //        '#estimate_options' => FALSE,
 //        '#field_sufix' => '',
-      '#increments' => array(),
-      '#theme_wrappers' => array(
-        'container' => array(
-          '#attributes' => array(
-            'class' => array('partial-date-element', 'clearfix', 'container-inline'),
-          ),
-        ),
+      '#increments' => [],
+      '#theme_wrappers' => [
+        'container' => [
+          '#attributes' => [
+            'class' => ['partial-date-element', 'clearfix', 'container-inline'],
+          ],
+        ],
         'form_element',
       ),
     ];
@@ -55,23 +55,23 @@ class PartialDateElement extends FormElement {
     foreach (partial_date_components() as $key => $label) {
       if (!empty($granularity[$key])) {
         $fieldName = $key . $fieldSufix;
-          $element[$key] = array(
-            '#title' => $label,
-            '#placeholder' => $label,
-            '#title_display' => 'invisible',
-            '#fieldName' => $fieldName,
-            '#value' => empty($element['#value'][$key]) ? '' : $element['#value'][$key],
-            '#attributes' => array(
-                'class' => array('partial_date_component'),
-                'fieldName' => $fieldName,
-            ),
-          );
+        $element[$key] = [
+          '#title' => $label,
+          '#placeholder' => $label,
+          '#title_display' => 'invisible',
+          '#fieldName' => $fieldName,
+          '#value' => empty($element['#value'][$key]) ? '' : $element['#value'][$key],
+          '#attributes' => [
+            'class' => ['partial_date_component'],
+            'fieldName' => $fieldName,
+          ],
+        ];
         if ($key == 'year') {
           $element[$key]['#type'] = 'textfield';
           $element[$key]['#attributes']['size'] = 5;
         } else {
           $inc = empty($increments[$key]) ? 1 : $increments[$key];
-          $blank_option = array('' => $label);
+          $blank_option = ['' => $label];
           $element[$key]['#type'] = 'select';
           $element[$key]['#options'] = partial_date_granularity_field_options($key, $blank_option, $inc);
         }

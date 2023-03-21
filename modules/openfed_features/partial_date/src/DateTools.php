@@ -81,9 +81,9 @@ class DateTools {
    */
   public static function monthMatrix($year = NULL) {
     if ($year && static::isLeapYear($year)) {
-      return array(31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+      return [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     }
-    return array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+    return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   }
 
   public static function lastDayOfMonth($month, $year = NULL) {
@@ -97,13 +97,23 @@ class DateTools {
   public static function monthNames($month = NULL) {
     static $month_names;
     if (empty($month_names)) {
-      $month_names = array(
-        1 => 'January', 2 => 'February', 3 => 'March', 4 => 'April', 5 => 'May',
-        6 => 'June', 7 => 'July', 8 => 'August', 9 => 'September',
-        10 => 'October', 11 => 'November', 12 => 'December');
+      $month_names = [
+        1 => 'January',
+        2 => 'February',
+        3 => 'March',
+        4 => 'April',
+        5 => 'May',
+        6 => 'June',
+        7 => 'July',
+        8 => 'August',
+        9 => 'September',
+        10 => 'October',
+        11 => 'November',
+        12 => 'December',
+      ];
 
       foreach ($month_names as $key => $month_name) {
-        $month_names[$key] = t($month_name, array(), array('context' => 'datetime'));
+        $month_names[$key] = t($month_name, [], ['context' => 'datetime']);
       }
     }
     if ($month) {
@@ -137,12 +147,18 @@ class DateTools {
   public static function weekdayNames($week_day_number) {
     static $day_names;
     if (empty($day_names)) {
-      $day_names = array(
-        0 => 'Sunday', 1 => 'Monday', 2 => 'Tuesday', 3 => 'Wednesday',
-        4 => 'Thursday', 5 => 'Friday', 6 => 'Saturday');
+      $day_names = [
+        0 => 'Sunday',
+        1 => 'Monday',
+        2 => 'Tuesday',
+        3 => 'Wednesday',
+        4 => 'Thursday',
+        5 => 'Friday',
+        6 => 'Saturday',
+      ];
 
       foreach ($day_names as $key => $day_name) {
-        $day_names[$key] = t($day_name, array(), array('context' => 'datetime'));
+        $day_names[$key] = t($day_name, [], ['context' => 'datetime']);
       }
     }
     if ($week_day_number) {
@@ -206,12 +222,12 @@ class DateTools {
     }
     static $suffixes;
     if (empty($suffixes)) {
-      $suffixes = array(
-        'st' => t('st', array(), array('context' => 'datetime')),
-        'nd' => t('nd', array(), array('context' => 'datetime')),
-        'rd' => t('rd', array(), array('context' => 'datetime')),
-        'th' => t('th', array(), array('context' => 'datetime')),
-      );
+      $suffixes = [
+        'st' => t('st', [], ['context' => 'datetime']),
+        'nd' => t('nd', [], ['context' => 'datetime']),
+        'rd' => t('rd', [], ['context' => 'datetime']),
+        'th' => t('th', [], ['context' => 'datetime']),
+      ];
     }
     switch (($day = abs($day)) % 100) {
       case 11:
