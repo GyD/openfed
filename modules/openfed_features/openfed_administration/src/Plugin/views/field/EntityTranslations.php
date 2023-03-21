@@ -91,7 +91,7 @@ class EntityTranslations extends FieldPluginBase {
    * {@inheritdoc}
    */
   public function render(ResultRow $values) {
-    /** @var ContentEntityInterface $entity */
+    /** @var \Drupal\Core\Entity\ContentEntityInterface $entity */
     $entity = $values->_entity;
     $entity_id = $entity->id();
     $entity_type = $entity->getEntityTypeId();
