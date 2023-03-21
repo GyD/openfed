@@ -1,4 +1,5 @@
 <?php
+
 namespace Drupal\openfed\Form;
 
 use Drupal\Core\Form\FormBase;
