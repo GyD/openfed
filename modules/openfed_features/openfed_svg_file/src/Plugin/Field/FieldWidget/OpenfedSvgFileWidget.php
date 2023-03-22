@@ -39,11 +39,17 @@ class OpenfedSvgFileWidget extends FileWidget {
   }
 
   /**
-   * Form API callback: Processes a openfed_svg_file field element.
+   * Form API callback: Processes an openfed_svg_file field element.
    *
    * Expands the openfed_svg_file type to include some attribute fields.
    *
-   * This method is assigned as a #process callback in formElement() method.
+   * This method is assigned as a #process callback in the formElement() method.
+   *
+   * @param $element
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   * @param $form
+   *
+   * @return mixed
    */
   public static function process($element, FormStateInterface $form_state, $form) {
     $item = $element['#value'];
@@ -53,32 +59,71 @@ class OpenfedSvgFileWidget extends FileWidget {
     if (!empty($element['#files'])) {
       $file = reset($element['#files']);
       $field_id = $element['#name'];
-      $attributes['width'] = 100;
-      $attributes['height'] = 100;
-      $attributes['alt'] = 'preview';
-      $attributes['title'] = $attributes['alt'];
 
-      $element['field_content_wrapper'] = [
-        '#type' => 'item',
+      // Set up the basic attributes for the preview.
+      $attributes = [
+        'width' => 100,
+        'height' => 100,
+        'alt' => 'preview',
+        'title' => 'preview',
       ];
-      $element['field_content_wrapper']['#wrapper_attributes']['class'][] = 'flex-container';
-      $element['field_content_wrapper']['#attached']['library'][] = 'openfed_svg_file/openfed_svg_file.form_edit';
 
-      $element['field_content_wrapper']['preview'] = [
+      $element['field_content_wrapper'] = static::processCreateFieldContentWrapper($attributes, $file->getFileUri());
+
+      // Add output type and attributes form elements.
+      $element['field_content_wrapper']['output_type'] = static::processCreateOutputTypeElements($item, $field_id);
+    }
+
+    return parent::process($element, $form_state, $form);
+  }
+
+  /**
+   * Create the field content wrapper element.
+   *
+   * @param array $attributes
+   *   The attributes for the preview element.
+   * @param string $file_uri
+   *   The file URI for the preview.
+   *
+   * @return array
+   *   The field content wrapper element.
+   */
+  protected static function processCreateFieldContentWrapper(array $attributes, string $file_uri) {
+    return [
+      '#type' => 'item',
+      '#wrapper_attributes' => ['class' => ['flex-container']],
+      '#attached' => ['library' => ['openfed_svg_file/openfed_svg_file.form_edit']],
+      'preview' => [
         '#theme' => 'openfed_svg_file__image',
         '#attributes' => $attributes,
-        '#uri' => $file->getFileUri(),
+        '#uri' => $file_uri,
         '#svg_data' => NULL,
         '#prefix' => '<div class="openfed_svg_file_image_preview">',
         '#suffix' => '</div>',
         '#weight' => '-20',
-      ];
+      ],
+    ];
+  }
 
-      $element['field_content_wrapper']['output_type'] = [
-        '#type' => 'item',
-      ];
+  /**
+   * Create the output type and attributes form elements.
+   *
+   * @param array $item
+   *   The current item values.
+   * @param string $field_id
+   *   The field ID for the current element.
+   *
+   * @return array
+   *   The output type and attributes form elements.
+   */
+  protected static function processCreateOutputTypeElements(array $item, string $field_id) {
 
-      $element['field_content_wrapper']['output_type']['type'] = [
+    $state_field_name = ':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]';
+
+    // Create the output type and related form elements.
+    return [
+      '#type' => 'item',
+      'type' => [
         '#type' => 'radios',
         '#title' => t('Output type'),
         '#default_value' => $item['type'] ?? 'image',
@@ -87,8 +132,8 @@ class OpenfedSvgFileWidget extends FileWidget {
         '#attributes' => [
           'class' => ['openfed_svg_file_type'],
         ],
-      ];
-      $element['field_content_wrapper']['output_type']['width'] = [
+      ],
+      'width' => [
         '#type' => 'number',
         '#title' => t('Width'),
         '#default_value' => $item['width'] ?? 100,
@@ -99,8 +144,8 @@ class OpenfedSvgFileWidget extends FileWidget {
         '#attributes' => [
           'class' => ['openfed_svg_file_width'],
         ],
-      ];
-      $element['field_content_wrapper']['output_type']['height'] = [
+      ],
+      'height' => [
         '#type' => 'number',
         '#title' => t('Height'),
         '#default_value' => $item['height'] ?? 100,
@@ -111,49 +156,47 @@ class OpenfedSvgFileWidget extends FileWidget {
         '#attributes' => [
           'class' => ['openfed_svg_file_height'],
         ],
-      ];
-      $element['field_content_wrapper']['output_type']['title'] = [
+      ],
+      'title' => [
         '#type' => 'textfield',
         '#title' => t('Title'),
         '#value' => $item['title'] ?? '',
         '#disabled' => TRUE,
         '#states' => [
           'visible' => [
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'iframe']],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+            [$state_field_name => ['value' => 'iframe']],
+            [$state_field_name => ['value' => 'image']],
           ],
           'enabled' => [
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'iframe']],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+            [$state_field_name => ['value' => 'iframe']],
+            [$state_field_name => ['value' => 'image']],
           ],
           'required' => [
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'iframe']],
+            [$state_field_name => ['value' => 'iframe']],
           ],
         ],
-      ];
-      $element['field_content_wrapper']['output_type']['alt'] = [
+      ],
+      'alt' => [
         '#type' => 'textfield',
         '#title' => t('Alt'),
         '#value' => $item['alt'] ?? '',
         '#disabled' => TRUE,
         '#states' => [
           'visible' => [
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'object']],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+            [$state_field_name => ['value' => 'object']],
+            [$state_field_name => ['value' => 'image']],
           ],
           'enabled' => [
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'object']],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+            [$state_field_name => ['value' => 'object']],
+            [$state_field_name => ['value' => 'image']],
           ],
           'required' => [
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'object']],
-            [':input[name="' . $field_id . '[field_content_wrapper][output_type][type]"]' => ['value' => 'image']],
+            [$state_field_name => ['value' => 'object']],
+            [$state_field_name => ['value' => 'image']],
           ],
         ],
-      ];
-    }
-
-    return parent::process($element, $form_state, $form);
+      ],
+    ];
   }
 
   /**
@@ -168,6 +211,8 @@ class OpenfedSvgFileWidget extends FileWidget {
       if (empty($input['display'])) {
         $input['display'] = $element['#display_field'] ? 0 : 1;
       }
+
+      // Merge the output_type value if the field_content_wrapper is set.
       if (isset($input['field_content_wrapper'])) {
         $input = array_merge($input, $input['field_content_wrapper']['output_type']);
       }
@@ -215,8 +260,9 @@ class OpenfedSvgFileWidget extends FileWidget {
       NestedArray::unsetValue($values, $path);
       $form_state->setValues($values);
     }
-    parent::extractFormValues($items, $form, $form_state);
 
+    // Call the parent method to handle the actual extraction of form values.
+    parent::extractFormValues($items, $form, $form_state);
   }
 
 }
