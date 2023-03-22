@@ -59,18 +59,20 @@ class OpenfedUpdate {
       $zip->extractTo($extractPath);
       $zip->close();
 
+      $subPath = $extractPath . DIRECTORY_SEPARATOR . 'openfed-project-' . self::$latestOpenfedVersion . DIRECTORY_SEPARATOR;
+
       // We'll merge the contents of the zip archive, but we'll ignore some
       // files. Those files will be removed/unlink.
       unlink($zipFile);
-      unlink($extractPath . DIRECTORY_SEPARATOR . 'openfed-project-' . self::$latestOpenfedVersion . DIRECTORY_SEPARATOR . '.gitignore');
-      unlink($extractPath . DIRECTORY_SEPARATOR . 'openfed-project-' . self::$latestOpenfedVersion . DIRECTORY_SEPARATOR . 'README.md');
+      unlink($subPath . '.gitignore');
+      unlink($subPath . 'README.md');
 
       // Composer.json and composer.patches.json, if exists, will be merged.
       // This is a best effort merge and should be manually confirmed.
-      self::_mergeComposer($extractPath . DIRECTORY_SEPARATOR . 'openfed-project-' . self::$latestOpenfedVersion . DIRECTORY_SEPARATOR . 'composer.json', '.' . DIRECTORY_SEPARATOR . 'composer.json');
-      unlink($extractPath . DIRECTORY_SEPARATOR . 'openfed-project-' . self::$latestOpenfedVersion . DIRECTORY_SEPARATOR . 'composer.json');
-      self::_mergeComposer($extractPath . DIRECTORY_SEPARATOR . 'openfed-project-' . self::$latestOpenfedVersion . DIRECTORY_SEPARATOR . 'composer.patches.json', '.' . DIRECTORY_SEPARATOR . 'composer.patches.json');
-      unlink($extractPath . DIRECTORY_SEPARATOR . 'openfed-project-' . self::$latestOpenfedVersion . DIRECTORY_SEPARATOR . 'composer.patches.json');
+      self::_mergeComposer($subPath . 'composer.json', '.' . DIRECTORY_SEPARATOR . 'composer.json');
+      unlink($subPath . 'composer.json');
+      self::_mergeComposer($subPath . 'composer.patches.json', '.' . DIRECTORY_SEPARATOR . 'composer.patches.json');
+      unlink($subPath . 'composer.patches.json');
 
       // All the remaining files will be copied as is (i.e.
       // composer.openfed.json)

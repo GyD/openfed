@@ -40,7 +40,7 @@ class PartialDateTimeRangeItem extends PartialDateTimeItem {
       }
 
       $properties[$key . '_to'] = DataDefinition::create('integer')
-        ->setLabel($label. t(' end '))
+        ->setLabel($label . t(' end '))
         ->setDescription(t('The ' . $label . ' for the finishing date component.'))
         ->setRequired($minimum_components['to']['granularity'][$key]);
     }
@@ -75,7 +75,7 @@ class PartialDateTimeRangeItem extends PartialDateTimeItem {
       }
 
       $column = $schema['columns'][$key];
-      //Add "*_to" columns
+      // Add "*_to" columns.
       $column['description'] = 'The ' . $label . ' for the finishing date component.';
       $schema['columns'][$key . '_to'] = $column;
     }

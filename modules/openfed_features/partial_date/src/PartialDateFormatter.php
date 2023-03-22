@@ -119,7 +119,8 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
   protected function formatComponent($key, $date, PartialDateFormatInterface $format) {
     $value = isset($date[$key]) && strlen($date[$key]) ? $date[$key] : FALSE;
     if (!$value) {
-      return ''; //if component value is missing, return an empty string.
+      // If component value is missing, return an empty string.
+      return '';
     }
     $keyFormat = $format->getComponent($key)['format'];
 
@@ -158,7 +159,7 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
     switch ($keyFormat) {
       case 'y-ce':
       case 'y':
-        return (strlen($value) > 2 ?  substr($value, - 2) : $value) . $suffix;
+        return (strlen($value) > 2 ? substr($value, -2) : $value) . $suffix;
 
       case 'F':
         return DateTools::monthNames($value) . $suffix;
@@ -181,7 +182,8 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
           $day = DateTools::dayOfWeek($date['year'], $date['month'], $value);
           if ($keyFormat == 'D') {
             return DateTools::weekdayAbbreviations($day, 3) . $suffix;
-          } else {
+          }
+          else {
             return DateTools::weekdayNames($day) . $suffix;
           }
         }
@@ -212,9 +214,10 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
         try {
           $tz = new \DateTimeZone($value);
           $transitions = $tz->getTransitions();
-          return $transitions[0]['abbr']  . $suffix;
+          return $transitions[0]['abbr'] . $suffix;
         }
-        catch (\Exception $e) {}
+        catch (\Exception $e) {
+        }
         return '';
 
       // @todo implement

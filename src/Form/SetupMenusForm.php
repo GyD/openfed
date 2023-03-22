@@ -11,14 +11,14 @@ use Drupal\Core\Form\FormStateInterface;
 class SetupMenusForm extends FormBase {
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function getFormId() {
     return 'openfed_install_menu_form';
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['#title'] = $this->t('Set up menus');
@@ -43,7 +43,7 @@ class SetupMenusForm extends FormBase {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $menu_list = $form_state->getValue('menu_list');

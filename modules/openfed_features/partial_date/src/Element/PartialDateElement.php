@@ -34,7 +34,7 @@ class PartialDateElement extends FormElement {
           ],
         ],
         'form_element',
-      ),
+      ],
     ];
   }
 
@@ -47,10 +47,10 @@ class PartialDateElement extends FormElement {
 //    $options = $element['#estimate_options'];
     $fieldSufix = $element['#field_sufix'];
     $increments = $element['#increments'];
-    $increments += array(
+    $increments += [
       'second' => 1,
       'minute' => 1,
-    );
+    ];
     $element['#tree'] = TRUE;
     foreach (partial_date_components() as $key => $label) {
       if (!empty($granularity[$key])) {
@@ -69,7 +69,8 @@ class PartialDateElement extends FormElement {
         if ($key == 'year') {
           $element[$key]['#type'] = 'textfield';
           $element[$key]['#attributes']['size'] = 5;
-        } else {
+        }
+        else {
           $inc = empty($increments[$key]) ? 1 : $increments[$key];
           $blank_option = ['' => $label];
           $element[$key]['#type'] = 'select';

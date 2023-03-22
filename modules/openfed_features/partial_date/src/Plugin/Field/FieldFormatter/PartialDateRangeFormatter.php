@@ -92,7 +92,7 @@ class PartialDateRangeFormatter extends PartialDateFormatter {
     return $element;
   }
 
-  /*
+  /**
    * Reduce identical range components to simplify the display.
    * Format is needed to know which side should be cleared. The order in which
    * year, month and day are displayed is important:
@@ -111,16 +111,16 @@ class PartialDateRangeFormatter extends PartialDateFormatter {
    * (same day was
    */
   protected function reduceRange(array &$from, array &$to) {
-    $sameDate = ($from['year']  == $to['year']) &&
+    $sameDate = ($from['year'] == $to['year']) &&
                 ($from['month'] == $to['month']) &&
-                ($from['day']   == $to['day']);
+                ($from['day'] == $to['day']);
     if ($sameDate) {
       $to['year']  = NULL;
       $to['month'] = NULL;
       $to['day']   = NULL;
       return;
     }
-    $hasTime =  isset($from['hour'])   || isset($to['hour']) ||
+    $hasTime = isset($from['hour'])   || isset($to['hour']) ||
                 isset($from['minute']) || isset($to['minute']) ||
                 isset($from['second']) || isset($to['second']);
     if ($hasTime) {
@@ -130,7 +130,7 @@ class PartialDateRangeFormatter extends PartialDateFormatter {
       $format = $this->getFormat();
       $year_weight = $format->getComponent('year')['weight'];
       $month_weight = $format->getComponent('month')['weight'];
-      //If "year before month" compress right (otherwise left)
+      // If "year before month" compress right (otherwise left)
       if ($year_weight <= $month_weight) {
         $to['year'] = NULL;
       }
@@ -140,7 +140,7 @@ class PartialDateRangeFormatter extends PartialDateFormatter {
 
       if ($from['month'] == $to['month']) {
         $day_weight = $format->getComponent('month')['weight'];
-        //If "month before day" compress right (otherwise left)
+        // If "month before day" compress right (otherwise left)
         if ($month_weight <= $day_weight) {
           $to['month'] = NULL;
         }

@@ -147,6 +147,11 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
     return $summary;
   }
 
+  /**
+   * Override options values.
+   *
+   * @return array
+   */
   protected function overrideOptions() {
     return [
       'none' => t('Use date only', [], ['context' => 'datetime']),
@@ -157,10 +162,15 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
     ];
   }
 
+  /**
+   * Return format options
+   *
+   * @return array
+   */
   protected function formatOptions() {
     $formats = $this->partialDateFormatStorage->loadMultiple();
     $options = [];
-    foreach($formats as $key => $format) {
+    foreach ($formats as $key => $format) {
       $options[$key] = $format->label();
     }
     return $options;
@@ -199,10 +209,13 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
    * @return \Drupal\partial_date\Entity\PartialDateFormatInterface
    *   The partial date format entity.
    */
-  protected function getFormat(){
+  protected function getFormat() {
     return $this->partialDateFormatStorage->load($this->getSetting('format'));
   }
 
+  /**
+   *
+   */
   protected function getTextOverride(PartialDateTimeItem $item) {
     $override = '';
     switch ($this->getSetting('use_override')) {
@@ -211,6 +224,7 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
           $override = $item->txt_short;
         }
         break;
+
       case 'long':
         if (strlen($item->txt_long)) {
           $override = $item->txt_long;
@@ -225,6 +239,7 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
           $override = $item->txt_short;
         }
         break;
+
       case 'short_long':
         if (strlen($item->txt_short)) {
           $override = $item->txt_short;
@@ -247,21 +262,21 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
   public function generateExampleDate($timestamp = 0, $timezone = NULL) {
     // PHP Date should handle any integer, but outside of the int range, 0 is
     // returned by intval(). On 32 bit systems this is Fri, 13 Dec 1901 20:45:54
-    // and Tue, 19 Jan 2038 03:14:07 GMT
+    // and Tue, 19 Jan 2038 03:14:07 GMT.
     $timestamp = intval($timestamp);
     if (!$timestamp) {
       $timestamp = \Drupal::time()->getRequestTime();
     }
     if (!$timezone) {
-      //$timezones = partial_date_granularity_field_options('timezone');
-      //$timezone = $timezones[rand(0, count($timezones) - 1)];
+      // $timezones = partial_date_granularity_field_options('timezone');
+      // $timezone = $timezones[rand(0, count($timezones) - 1)];
       $timezone = partial_date_timezone_handling_correlation('UTC', 'site');
     }
     try {
       $tz = new \DateTimeZone($timezone);
       $date = new \DateTime('@' . $timestamp, $tz);
       if ($date) {
-        return array(
+        return [
           'year' => $date->format('Y'),
           'month' => $date->format('n'),
           'day' => $date->format('j'),
@@ -269,10 +284,11 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
           'minute' => $date->format('i'),
           'second' => $date->format('s'),
           'timezone' => $timezone,
-        );
+        ];
       }
     }
-    catch (\Exception $e) {}
+    catch (\Exception $e) {
+    }
 
     return FALSE;
   }

@@ -55,6 +55,9 @@ class PartialDateComponentsElement extends FormElement {
     return $element;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
     $result = [];
     if ($input === FALSE) {

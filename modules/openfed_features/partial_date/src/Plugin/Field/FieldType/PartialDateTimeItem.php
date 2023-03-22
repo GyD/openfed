@@ -37,7 +37,7 @@ class PartialDateTimeItem extends FieldItemBase {
     $properties['txt_long'] = DataDefinition::create('string')
       ->setLabel(t('Long text'))
       ->setRequired($minimum_components['txt_long']);
-    //Components: 'year', 'month', 'day', 'hour', 'minute', 'second', 'timezone'
+    // Components: 'year', 'month', 'day', 'hour', 'minute', 'second', 'timezone'.
     foreach (partial_date_components() as $key => $label) {
       if ($key == 'timezone') {
         $properties[$key] = DataDefinition::create('string')

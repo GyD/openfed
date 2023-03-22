@@ -169,7 +169,7 @@ class OpenfedSvgFileWidget extends FileWidget {
         $input['display'] = $element['#display_field'] ? 0 : 1;
       }
       if (isset($input['field_content_wrapper'])) {
-        $input = array_merge($input,$input['field_content_wrapper']['output_type']);
+        $input = array_merge($input, $input['field_content_wrapper']['output_type']);
       }
     }
 
@@ -189,7 +189,7 @@ class OpenfedSvgFileWidget extends FileWidget {
   /**
    * Form element validation handler for #type 'number'.
    */
-  public static function  element_validate_integer_positive(&$element, FormStateInterface $form_state, &$complete_form) {
+  public static function element_validate_integer_positive(&$element, FormStateInterface $form_state, &$complete_form) {
     $value = $element['#value'];
     if ($value !== '' && (!is_numeric($value) || intval($value) != $value || $value < 0)) {
       $form_state->setError($element, t('%name must be a positive integer.', ['%name' => $element['#title']]));
