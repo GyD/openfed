@@ -26,13 +26,9 @@ class CheckboxWithOptionsElement extends FormElement {
       '#theme_wrappers' => ['form_element'],
     ];
   }
-  
-  /**
-   * Process callback.
-   */
 
   /**
-   * Extra params available: FormStateInterface $form_state, &$complete_form) {.
+   * Process callback.
    */
   public static function processElement(&$element) {
 
@@ -41,7 +37,7 @@ class CheckboxWithOptionsElement extends FormElement {
     $cbValue = $element['#checkbox_value'] ?? '1';
     $defaultValue = $element['#default_value'] ?? $cbValue;
     unset($options[$cbValue]);
-    //Using "master" checkbox instead of the title!
+    // Using "master" checkbox instead of the title!
     $element['#title_display'] = 'invisible';
     $element['master'] = [
       '#type' => 'checkbox',
@@ -50,7 +46,8 @@ class CheckboxWithOptionsElement extends FormElement {
       '#default_value' => ($cbValue != $defaultValue),
     // '#value' => $cbValue,
     ];
-    // #states property not working for radios element. must add a container to show/hide details.
+    // #states property not working for radios element.
+    // Must add a container to show/hide details.
     $element['details'] = [
       '#type' => 'container',
       '#states' => [
@@ -104,7 +101,8 @@ class CheckboxWithOptionsElement extends FormElement {
         }
       }
       return $result;
-    } elseif (isset($input['details']['options'])) {
+    }
+    elseif (isset($input['details']['options'])) {
       return $input['details']['options'];
     }
     return NULL;
