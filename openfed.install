@@ -37,7 +37,7 @@ function openfed_update_91101() {
  */
 function openfed_update_91102() {
   // Load file entity handling functions.
-  module_load_include('inc', 'file_entity', 'file_entity.file');
+  \Drupal::moduleHandler()->loadInclude('file_entity', 'inc', 'file_entity.file');
 
   // Load all files.
   /** @var \Drupal\file\FileInterface[] $files */
