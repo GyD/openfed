@@ -35,9 +35,7 @@ class OpenfedSvgFileWidget extends FileWidget {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element = parent::formElement($items, $delta, $element, $form, $form_state);
-
-    return $element;
+    return parent::formElement($items, $delta, $element, $form, $form_state);
   }
 
   /**

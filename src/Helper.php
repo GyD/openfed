@@ -42,14 +42,11 @@ class Helper {
    */
   function _openfed_get_languages_list() {
     // Set the language list. Defined order should be used to set the weight.
-    $languages_list = [
+    return [
       'nl' => t('Dutch (Nederlands)'),
       'fr' => t('French (Français)'),
       'de' => t('German (Deutsch)'),
     ];
-
-    // Return.
-    return $languages_list;
   }
 
   /**
@@ -59,13 +56,12 @@ class Helper {
    *   The menus list.
    */
   function _openfed_get_menus_list() {
-    $menu_list = [
+    return [
       'menu-tools-menu' => t('Tools Menu: placed at the very top of the screen.'),
       'menu-header-menu' => t('Header Menu: placed at the header of the screen.'),
       'menu-main-menu' => t('Main Menu: placed as the primary menu of the site.'),
       'menu-footer-menu' => t('Footer Menu: placed at the very bottom of the screen.'),
     ];
-    return $menu_list;
   }
 
   /**
@@ -75,11 +71,10 @@ class Helper {
    *   The roles list.
    */
   function _openfed_get_roles_list() {
-    $role_list = [
+    return [
       'configurator' => t('Configurator: Experienced Drupal user, can configure modules.'),
       'user_manager' => t('User Manager: Can create new users and manage their permissions.'),
     ];
-    return $role_list;
   }
 
   /**
@@ -89,7 +84,7 @@ class Helper {
    */
   function _openfed_get_roles_list_default() {
     // Set roles.
-    $role_key = [
+    return [
       'authenticated' => [
         'label' => 'Authenticated',
         'weight' => 0,
@@ -139,9 +134,6 @@ class Helper {
         'permissions' => [],
       ],
     ];
-
-    // Return.
-    return $role_key;
   }
 
   /**
@@ -151,7 +143,7 @@ class Helper {
    *   The workflow option list.
    */
   function _openfed_get_workflow_list() {
-    $workflow_list = [
+    return [
       self::WORKFLOW_BASIC_CONFIG => t('Basic configuration: there will be
       "Draft", "Archived" and "Published" states and content editor can change
       transitions from one to another.'),
@@ -162,7 +154,6 @@ class Helper {
       "Archived" to "Draft". It\'s up to the Content Editor to manage
       transitions between all the states.'),
     ];
-    return $workflow_list;
   }
 
 }

@@ -27,21 +27,21 @@ class OpenfedSvgFileFormatter extends FileFormatterBase {
   }
 
   /**
+   * @todo Possible useless method overriding , check if necessary.
+   * 
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
-    $form = parent::settingsForm($form, $form_state);
-
-    return $form;
+    return parent::settingsForm($form, $form_state);
   }
 
   /**
+   * @todo Possible useless method overriding , check if necessary.
+   *
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $summary = [];
-
-    return $summary;
+    return [];
   }
 
   /**
@@ -93,6 +93,5 @@ class OpenfedSvgFileFormatter extends FileFormatterBase {
 
     return $elements;
   }
-
 
 }

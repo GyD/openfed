@@ -41,8 +41,8 @@ class OpenfedSvgFileItem extends FileItem {
    */
   public static function defaultFieldSettings() {
     $settings = [
-        'file_extensions' => 'svg',
-      ] + parent::defaultFieldSettings();
+      'file_extensions' => 'svg',
+    ] + parent::defaultFieldSettings();
 
     unset($settings['description_field']);
     return $settings;
@@ -121,9 +121,7 @@ class OpenfedSvgFileItem extends FileItem {
    * {@inheritdoc}
    */
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
-    $element = [];
-
-    return $element;
+    return [];
   }
 
   /**
