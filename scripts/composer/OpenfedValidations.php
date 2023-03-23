@@ -70,7 +70,7 @@ class OpenfedValidations {
    */
   private static function _checkProjectVersion() {
     $composer_openfed = json_decode(file_get_contents('composer.openfed.json'), TRUE);
-    $current_version = isset($composer_openfed['require']['openfed/openfed8']) ? $composer_openfed['require']['openfed/openfed8'] : $composer_openfed['require']['openfed/openfed'];
+    $current_version = $composer_openfed['require']['openfed/openfed8'] ?? $composer_openfed['require']['openfed/openfed'];
     preg_match('/(?:[\d+\.?]+[a-zA-Z0-9-]*)/', $current_version, $matches);
     // If current version is dev, we should ignore version check.
     if (strpos($current_version, 'dev') !== FALSE) {

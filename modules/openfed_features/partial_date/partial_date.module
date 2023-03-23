@@ -127,7 +127,7 @@ function partial_date_timezone_handling_correlation($timezone = '', $tz_handling
     case 'date':
     case 'none':
       // Parse the existing timezone.
-      $timezone = isset($timezone) ? $timezone : '';
+      $timezone = $timezone ?? '';
       switch ($timezone) {
         case '--user--':
         case '--site--':
