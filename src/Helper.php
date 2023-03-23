@@ -22,6 +22,21 @@ class Helper {
   protected $site_path;
 
   /**
+   * Drupal Root.
+   *
+   * @var string
+   */
+  private $root;
+
+  /**
+   * ;
+   * Path of the site.
+   *
+   * @var string
+   */
+  private $sitePath;
+
+  /**
    * Helper constructor.
    *
    * @param string $drupal_root
@@ -29,7 +44,7 @@ class Helper {
    * @param string $site_path
    *   The path to the site's configuration (e.g. sites/default).
    */
-  function __construct($drupal_root, $site_path) {
+  public function __construct($drupal_root, $site_path) {
     $this->root = $drupal_root;
     $this->sitePath = (string) $site_path;
   }
@@ -38,9 +53,9 @@ class Helper {
    * Gets the list of potential languages.
    *
    * @return array
-   *  The language list.
+   *   The language list.
    */
-  function _openfed_get_languages_list() {
+  public function _openfed_get_languages_list() {
     // Set the language list. Defined order should be used to set the weight.
     return [
       'nl' => t('Dutch (Nederlands)'),
@@ -55,7 +70,7 @@ class Helper {
    * @return array
    *   The menus list.
    */
-  function _openfed_get_menus_list() {
+  public function _openfed_get_menus_list() {
     return [
       'menu-tools-menu' => t('Tools Menu: placed at the very top of the screen.'),
       'menu-header-menu' => t('Header Menu: placed at the header of the screen.'),
@@ -70,7 +85,7 @@ class Helper {
    * @return array
    *   The roles list.
    */
-  function _openfed_get_roles_list() {
+  public function _openfed_get_roles_list() {
     return [
       'configurator' => t('Configurator: Experienced Drupal user, can configure modules.'),
       'user_manager' => t('User Manager: Can create new users and manage their permissions.'),
@@ -82,7 +97,7 @@ class Helper {
    *
    * Used to be called after install.
    */
-  function _openfed_get_roles_list_default() {
+  public function _openfed_get_roles_list_default() {
     // Set roles.
     return [
       'authenticated' => [
@@ -142,7 +157,7 @@ class Helper {
    * @return array
    *   The workflow option list.
    */
-  function _openfed_get_workflow_list() {
+  public function _openfed_get_workflow_list() {
     return [
       self::WORKFLOW_BASIC_CONFIG => t('Basic configuration: there will be
       "Draft", "Archived" and "Published" states and content editor can change
