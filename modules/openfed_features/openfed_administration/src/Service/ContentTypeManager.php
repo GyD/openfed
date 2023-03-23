@@ -53,6 +53,7 @@ class ContentTypeManager {
    *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function assignPermissionsToRoles(string $content_type_name) {
     $roles = $this->entityTypeManager->getStorage('user_role')->loadMultiple([

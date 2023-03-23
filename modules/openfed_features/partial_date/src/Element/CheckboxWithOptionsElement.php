@@ -68,14 +68,20 @@ class CheckboxWithOptionsElement extends FormElement {
 
   /**
    * #element_validate callback.
-   * {@inheritdoc}
+   *
+   * @param $element
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   * @param $complete_form
+   *
+   * @return void
    */
   public static function validateElement(&$element, FormStateInterface $form_state, &$complete_form) {
     $value = $element['#value'];
     // The valueCallback function (below) does set the element's #value property
     // BUT not to the $form_state leading to the setting value (for which the
     // element corresponds) to be not as expected.
-    // Thus setValueForElement is forced here. (in valueCallback would not have worked!)
+    // Thus setValueForElement is forced here
+    // (in case valueCallback would not have worked!).
     if (!empty($value)) {
       // \Drupal::logger('partial_date')->debug('Setting result: ' . $value);
       $form_state->setValueForElement($element, $value);
@@ -83,7 +89,7 @@ class CheckboxWithOptionsElement extends FormElement {
   }
 
   /**
-   *
+   * {@inheritDoc}
    */
   public static function valueCallback(&$element, $input, FormStateInterface $form_state) {
     if ($input === FALSE) {

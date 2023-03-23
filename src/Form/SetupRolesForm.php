@@ -66,10 +66,10 @@ class SetupRolesForm extends FormBase {
       if ($role['required'] || isset($roles[$role_id])) {
         $new_role = [
           'id' => $role_id,
-          'label' => $openfed_roles[$role_id]['label'],
+          'label' => $role['label'],
           'langcode' => 'en',
           'status' => 1,
-          'weight' => $openfed_roles[$role_id]['weight'],
+          'weight' => $role['weight'],
           'permissions' => [],
         ];
 

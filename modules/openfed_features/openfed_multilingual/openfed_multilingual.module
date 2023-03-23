@@ -15,12 +15,14 @@ function openfed_multilingual_language_switch_links_alter(array &$links, $type, 
   /** @var Drupal\node\Entity\Node $node */
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     foreach ($links as $langcode => $link) {
-      if ($node && !array_key_exists($langcode, $node->getTranslationLanguages(TRUE)) || ($node->getTranslation($langcode) && !$node->getTranslation($langcode)
-            ->access('view'))
+      if (
+        $node
+        && !array_key_exists($langcode, $node->getTranslationLanguages(TRUE))
+        || ($node->getTranslation($langcode) && !$node->getTranslation($langcode)->access('view'))
       ) {
-        //There is no translation in that language, disable url
+        // There is no translation in that language, disable url.
         unset($links[$langcode]['url']);
-        //And do something with attributes (eg. add class)
+        // And do something with attributes (eg. add class)
         $links[$langcode]['attributes']['class'][] = 'disabled';
       }
     }

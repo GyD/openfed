@@ -12,7 +12,7 @@ namespace Drupal\partial_date;
 use Drupal\Component\Utility\Unicode;
 
 /**
- * Description of DateTools
+ * Description of DateTools.
  *
  * @author CosminFr
  */
@@ -56,7 +56,8 @@ class DateTools {
   /**
    * Returns true, if given $year is a leap year.
    *
-   * @param  integer $year
+   * @param int $year
+   *
    * @return boolean true, if year is leap year
    */
   public static function isLeapYear($year) {
@@ -64,10 +65,11 @@ class DateTools {
       return FALSE;
     }
     if ($year < 1582) {
-      // pre Gregorio XIII - 1582
+      // Pre Gregorio XIII - 1582.
       return $year % 4 == 0;
-    } else {
-      // post Gregorio XIII - 1582
+    }
+    else {
+      // Post Gregorio XIII - 1582.
       return (($year % 4 == 0) && ($year % 100 != 0)) || ($year % 400 == 0);
     }
   }
@@ -76,6 +78,7 @@ class DateTools {
    * Maps out the valid month ranges for a given year.
    *
    * @param int $year
+   *   The year.
    *
    * @return array
    *   Note, there is no array index.
@@ -87,6 +90,16 @@ class DateTools {
     return [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   }
 
+  /**
+   * Return the last day of a month from a certain year.
+   *
+   * @param int $month
+   *   The month whose last day is to be known.
+   * @param int $year
+   *   Year of the month.
+   *
+   * @return int
+   */
   public static function lastDayOfMonth($month, $year = NULL) {
     $matrix = self::monthMatrix($year);
     return $matrix[$month];
@@ -129,11 +142,22 @@ class DateTools {
   public static function monthAbbreviations($month) {
     static $month_names;
     if (empty($month_names)) {
-      $month_names = array(
-        1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'May', 6 => 'Jun',
-        7 => 'Jul', 8 => 'Aug', 9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec');
+      $month_names = [
+        1 => 'Jan',
+        2 => 'Feb',
+        3 => 'Mar',
+        4 => 'Apr',
+        5 => 'May',
+        6 => 'Jun',
+        7 => 'Jul',
+        8 => 'Aug',
+        9 => 'Sep',
+        10 => 'Oct',
+        11 => 'Nov',
+        12 => 'Dec',
+      ];
       foreach ($month_names as $key => $month_name) {
-        $month_names[$key] = t($month_name, array(), array('context' => 'datetime'));
+        $month_names[$key] = t($month_name, [], ['context' => 'datetime']);
       }
     }
     if ($month) {
@@ -172,7 +196,7 @@ class DateTools {
    * Returns a translated array of weekday names.
    */
   public static function weekdayAbbreviations($week_day_number, $length = 3) {
-    $name = STATIC::weekdayNames($week_day_number);
+    $name = static::weekdayNames($week_day_number);
     if (mb_strlen($name) > $length) {
       return mb_substr($name, 0, $length);
     }

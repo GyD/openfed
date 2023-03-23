@@ -76,7 +76,7 @@ class PartialDateRangeWidget extends PartialDateWidget {
     $element['prefix'] = ['#plain_text' => $help_txt['estimates_prefix']];
     $components = partial_date_components();
     foreach ($estimates as $key => $value) {
-      if (!empty($value) && !empty($estimates[$key])) {
+      if (empty($value)) {
         $has_content = TRUE;
         $estimate_label = t('@component estimate', ['@component' => $components[$key]]);
         $blank_option = ['' => $estimate_label];
@@ -86,7 +86,7 @@ class PartialDateRangeWidget extends PartialDateWidget {
           '#title_display' => 'invisible',
 //          '#value' => empty($element['#value'][$key . '_estimate']) ? '' : $element['#value'][$key . '_estimate'],
 //          '#attributes' => $element['#attributes'],
-          '#options' => $blank_option + $estimates[$key],
+          '#options' => $blank_option + $value,
           '#attributes' => [
             'class' => ['estimate_selector'],
             'date_component' => $key,
