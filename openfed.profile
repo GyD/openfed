@@ -74,10 +74,6 @@ function openfed_form_install_configure_form_alter(array &$form, FormStateInterf
   $form['regional_settings']['site_default_country']['#default_value'] = 'BE';
   $form['regional_settings']['date_default_timezone']['#default_value'] = 'Europe/Brussels';
 
-  // Don't check for updates and no need for email notifications
-  $form['update_notifications']['update_status_module']['#default_value'] = [];
-
-
   // Add an option to disable HTTPS.
   $form['regional_settings']['disable_https_fieldset'] = [
     '#type' => 'fieldset',
