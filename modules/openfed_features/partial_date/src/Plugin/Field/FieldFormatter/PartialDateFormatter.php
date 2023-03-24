@@ -271,7 +271,7 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
     if (!$timestamp) {
       $timestamp = Drupal::time()->getRequestTime();
     }
-    if (!$timezone) {
+    if (empty($timezone)) {
       // $timezones = partial_date_granularity_field_options('timezone');
       // $timezone = $timezones[rand(0, count($timezones) - 1)];
       $timezone = partial_date_timezone_handling_correlation('UTC', 'site');
@@ -279,17 +279,15 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
     try {
       $tz = new DateTimeZone($timezone);
       $date = new DateTime('@' . $timestamp, $tz);
-      if ($date) {
-        return [
-          'year' => $date->format('Y'),
-          'month' => $date->format('n'),
-          'day' => $date->format('j'),
-          'hour' => $date->format('G'),
-          'minute' => $date->format('i'),
-          'second' => $date->format('s'),
-          'timezone' => $timezone,
-        ];
-      }
+      return [
+        'year' => $date->format('Y'),
+        'month' => $date->format('n'),
+        'day' => $date->format('j'),
+        'hour' => $date->format('G'),
+        'minute' => $date->format('i'),
+        'second' => $date->format('s'),
+        'timezone' => $timezone,
+      ];
     }
     catch (Exception $e) {
     }
