@@ -1,6 +1,7 @@
 <?php
 namespace Drupal\openfed\Form;
 
+use Drupal;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\user\Entity\Role;
@@ -28,7 +29,7 @@ class SetupRolesForm extends FormBase {
     $form['role_list'] = [
       '#type' => 'checkboxes',
       '#title' => t('Roles'),
-      '#options' => \Drupal::service('openfed.helper')
+      '#options' => Drupal::service('openfed.helper')
         ->_openfed_get_roles_list(),
       '#description' => t('By selecting the roles, the roles and their associated set of permissions will be automatically created.<br><br>
       They can also be created after the installation, but the set of permissions will have to be defined manually.'),
@@ -37,7 +38,7 @@ class SetupRolesForm extends FormBase {
     $form['workflow_option'] = [
       '#type' => 'radios',
       '#title' => t('Workflow settings'),
-      '#options' => \Drupal::service('openfed.helper')
+      '#options' => Drupal::service('openfed.helper')
         ->_openfed_get_workflow_list(),
       '#default_value' => Helper::WORKFLOW_BASIC_CONFIG,
     ];
@@ -59,7 +60,7 @@ class SetupRolesForm extends FormBase {
     $roles = array_filter($form_state->getValue('role_list'));
     $workflow_option = $form_state->getValue('workflow_option');
 
-    $openfed_roles = \Drupal::service('openfed.helper')
+    $openfed_roles = Drupal::service('openfed.helper')
       ->_openfed_get_roles_list_default();
 
     foreach ($openfed_roles as $role_id => $role) {
@@ -98,7 +99,7 @@ class SetupRolesForm extends FormBase {
       }
 
       // Enable Advanced Workflow configuration.
-      \Drupal::service('module_installer')->install(['openfed_workflow']);
+      Drupal::service('module_installer')->install(['openfed_workflow']);
     }
 
     // It's required that user 1 is set with Administratior role.

@@ -2,6 +2,9 @@
 
 namespace Drupal\partial_date\Plugin\Field\FieldFormatter;
 
+use DateTime;
+use DateTimeZone;
+use Drupal;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
@@ -10,6 +13,7 @@ use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\partial_date\PartialDateFormatterInterface;
 use Drupal\partial_date\Plugin\Field\FieldType\PartialDateTimeItem;
+use Exception;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -265,7 +269,7 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
     // and Tue, 19 Jan 2038 03:14:07 GMT.
     $timestamp = intval($timestamp);
     if (!$timestamp) {
-      $timestamp = \Drupal::time()->getRequestTime();
+      $timestamp = Drupal::time()->getRequestTime();
     }
     if (!$timezone) {
       // $timezones = partial_date_granularity_field_options('timezone');
@@ -273,8 +277,8 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
       $timezone = partial_date_timezone_handling_correlation('UTC', 'site');
     }
     try {
-      $tz = new \DateTimeZone($timezone);
-      $date = new \DateTime('@' . $timestamp, $tz);
+      $tz = new DateTimeZone($timezone);
+      $date = new DateTime('@' . $timestamp, $tz);
       if ($date) {
         return [
           'year' => $date->format('Y'),
@@ -287,7 +291,7 @@ class PartialDateFormatter extends FormatterBase implements ContainerFactoryPlug
         ];
       }
     }
-    catch (\Exception $e) {
+    catch (Exception $e) {
     }
 
     return FALSE;

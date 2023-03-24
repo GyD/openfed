@@ -2,6 +2,7 @@
 
 namespace Drupal\openfed\Form;
 
+use Drupal;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -26,7 +27,7 @@ class SetupMenusForm extends FormBase {
     $form['menu_list'] = [
       '#type' => 'checkboxes',
       '#title' => t('Menus'),
-      '#options' => \Drupal::service('openfed.helper')
+      '#options' => Drupal::service('openfed.helper')
         ->_openfed_get_menus_list(),
       '#description' => t('By checking these options, the menus will automatically be created in the menus list of the website and shown in the corresponding region (either the tools or the footer region).<br><br>
       If no menus are checked, they can still be created after the installation, but they will need to be created and added to the correct region manually.'),
@@ -51,7 +52,7 @@ class SetupMenusForm extends FormBase {
     if (!empty($menu_list)) {
       foreach ($menu_list as $menu_key => $menu_identity) {
         if ($menu_key === $menu_identity) {
-          $language_list = \Drupal::state()
+          $language_list = Drupal::state()
             ->get('openfed_regional_list_chosen', []);
           foreach ($language_list as $lang) {
             $menu_name = substr($menu_identity, 0, strlen($menu_identity) - 4);
@@ -82,7 +83,7 @@ class SetupMenusForm extends FormBase {
       }
 
       // Rebuild menu.
-      \Drupal::service('router.builder')->rebuild();
+      Drupal::service('router.builder')->rebuild();
     }
   }
 
@@ -106,7 +107,7 @@ class SetupMenusForm extends FormBase {
     $menu['langcode'] = $language;
     $menu['locked'] = 0;
     $menu['status'] = 1;
-    \Drupal::entityTypeManager()->getStorage('menu')->create($menu)->save();
+    Drupal::entityTypeManager()->getStorage('menu')->create($menu)->save();
   }
 
 }

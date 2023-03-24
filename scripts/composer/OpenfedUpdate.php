@@ -3,8 +3,10 @@
 namespace OpenfedProject\composer;
 
 use Composer\Script\Event;
+use Drupal;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\DrupalKernel;
+use ErrorException;
 use Symfony\Component\HttpFoundation\Request;
 use ZipArchive;
 
@@ -45,7 +47,7 @@ class OpenfedUpdate {
 
       self::_initDrupalContainer();
       /** @var GuzzleHttp\Psr\Response $response */
-      $response = \Drupal::httpClient()->get($url, ['sink' => $zip_resource]);
+      $response = Drupal::httpClient()->get($url, ['sink' => $zip_resource]);
 
       if (!$response) {
         echo "Error :- Cannot connect.";
@@ -53,7 +55,7 @@ class OpenfedUpdate {
 
       $zip = new ZipArchive;
       if ($zip->open($zipFile) != "true") {
-        throw new \ErrorException("Error :- Unable to open the Zip File.");
+        throw new ErrorException("Error :- Unable to open the Zip File.");
       }
 
       $zip->extractTo($extractPath);

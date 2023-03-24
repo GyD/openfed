@@ -2,6 +2,7 @@
 
 namespace Drupal\openfed\Form;
 
+use Drupal;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
@@ -28,12 +29,12 @@ class SetupLanguagesForm extends FormBase {
     $form['regional_list'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Regional languages'),
-      '#options' => \Drupal::service('openfed.helper')
+      '#options' => Drupal::service('openfed.helper')
         ->_openfed_get_languages_list(),
       '#description' => '<p>' . $this->t('When checking a language, a main menu will automatically be created in the menus list for that language, and the menu will be located in the corresponding Navigation area.<br><br>
       If no languages are selected, only the English language will be enabled.<br>Consequently, the main menu will be created for the English language only and will be located in the Navigation area.<br><br>
       Additional languages can be enabled after the installation, but the main menu will then have to be created manually for each language and located in the corresponding area.') . '</p>',
-      '#default_value' => \Drupal::state()->get('openfed_regional_list_chosen', [
+      '#default_value' => Drupal::state()->get('openfed_regional_list_chosen', [
         'nl',
         'fr',
         'de',
@@ -108,10 +109,10 @@ class SetupLanguagesForm extends FormBase {
       // This is being enabled after adding new languages, otherwise
       // content_translation module will throw a warning about adding more
       // languages.
-      \Drupal::service('module_installer')->install(['openfed_multilingual']);
+      Drupal::service('module_installer')->install(['openfed_multilingual']);
     }
 
-    \Drupal::state()
+    Drupal::state()
       ->set('openfed_regional_list_chosen', array_filter($regional_enabled));
 
     // Check cookie and language selection option.
@@ -121,7 +122,7 @@ class SetupLanguagesForm extends FormBase {
         'language_cookie',
         'language_selection_page',
       ];
-      \Drupal::service('module_installer')->install($module_list);
+      Drupal::service('module_installer')->install($module_list);
 
       // Set negotiation methods and define their order.
       $type = LanguageInterface::TYPE_INTERFACE;
@@ -131,7 +132,7 @@ class SetupLanguagesForm extends FormBase {
         'language-selection-page' => 2,
         'language-selected' => 3,
       ];
-      \Drupal::service('language_negotiator')
+      Drupal::service('language_negotiator')
         ->saveConfiguration($type, $enabled_methods);
     }
 

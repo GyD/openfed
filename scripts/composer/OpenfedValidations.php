@@ -3,7 +3,9 @@
 namespace OpenfedProject\composer;
 
 use Composer\Script\Event;
+use Drupal;
 use Drupal\Core\DrupalKernel;
+use ErrorException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -91,7 +93,7 @@ class OpenfedValidations {
     $composer_file = json_decode(file_get_contents('composer.json'), TRUE);
     $merged_composers = array_search('composer.libraries.json', $composer_file['extra']['merge-plugin']['require']);
     if (strpos($composer_file['require']['wikimedia/composer-merge-plugin'], '^1.') !== FALSE || $merged_composers !== FALSE) {
-      throw new \ErrorException("Your composer.json doesn't seem to be up to date.");
+      throw new ErrorException("Your composer.json doesn't seem to be up to date.");
     }
   }
 
@@ -115,7 +117,7 @@ class OpenfedValidations {
     foreach ($modules_to_check as $module) {
       $output = trim(shell_exec('drush pml --field="status" --filter="name~=#(' . $module . ')#i"'));
       if ($output == 'Enabled') {
-        throw new \ErrorException("You can't proceed with Openfed update until you uninstall $module. See Openfed 8x-10.0 release notes.");
+        throw new ErrorException("You can't proceed with Openfed update until you uninstall $module. See Openfed 8x-10.0 release notes.");
       }
     }
   }
@@ -161,7 +163,7 @@ class OpenfedValidations {
       self::_initDrupalContainer();
 
       // 1. Check Rendering Blocks.
-      $available_blocks = array_keys(\Drupal::service('plugin.manager.block')->getDefinitions());
+      $available_blocks = array_keys(Drupal::service('plugin.manager.block')->getDefinitions());
       $search = shell_exec('find ./docroot/themes/ ./config/ -name "*.twig" | xargs grep -hi "drupal_block"');
       $pattern = '/drupal_block\([\'|"]([a-zA-Z0-9\-_]+)[\'|"]\)/';
       preg_match_all($pattern, $search, $matches);
@@ -170,7 +172,7 @@ class OpenfedValidations {
         // If one of the block matches is an available block plugin id, we
         // should not proceed.
         if (!in_array($block_id, $available_blocks)) {
-          throw new \ErrorException("You should convert your theme to Twig Tweak 2.x before updating Openfed. See https://www.drupal.org/docs/contributed-modules/twig-tweak/migrating-to-twig-tweak-2x#rendering-blocks.");
+          throw new ErrorException("You should convert your theme to Twig Tweak 2.x before updating Openfed. See https://www.drupal.org/docs/contributed-modules/twig-tweak/migrating-to-twig-tweak-2x#rendering-blocks.");
         }
       }
 
@@ -183,14 +185,14 @@ class OpenfedValidations {
         // If one of the block matches is an available block plugin id, we
         // should not proceed.
         if (substr($expression, -1) != '/') {
-          throw new \ErrorException("You should convert your theme to Twig Tweak 2.x before updating Openfed. See https://www.drupal.org/docs/contributed-modules/twig-tweak/migrating-to-twig-tweak-2x#preg-replace-filter.");
+          throw new ErrorException("You should convert your theme to Twig Tweak 2.x before updating Openfed. See https://www.drupal.org/docs/contributed-modules/twig-tweak/migrating-to-twig-tweak-2x#preg-replace-filter.");
         }
       }
 
       // 3. Check Entity access.
-      $twig_tweak_check_access = \Drupal::service('settings')->get('twig_tweak_check_access');
+      $twig_tweak_check_access = Drupal::service('settings')->get('twig_tweak_check_access');
       if ($twig_tweak_check_access === FALSE) {
-        throw new \ErrorException("You should convert your settings.php to Twig Tweak 2.x before updating Openfed. See https://www.drupal.org/docs/contributed-modules/twig-tweak/migrating-to-twig-tweak-2x#entity-access.");
+        throw new ErrorException("You should convert your settings.php to Twig Tweak 2.x before updating Openfed. See https://www.drupal.org/docs/contributed-modules/twig-tweak/migrating-to-twig-tweak-2x#entity-access.");
       }
 
       // 4. Check Region wrapper.
@@ -201,7 +203,7 @@ class OpenfedValidations {
       preg_match_all($pattern, $search, $matches);
 
       if (!empty($matches[0])) {
-        throw new \ErrorException("You should convert your theme to Twig Tweak 2.x before updating Openfed. See https://www.drupal.org/docs/contributed-modules/twig-tweak/migrating-to-twig-tweak-2x#default-field-language.");
+        throw new ErrorException("You should convert your theme to Twig Tweak 2.x before updating Openfed. See https://www.drupal.org/docs/contributed-modules/twig-tweak/migrating-to-twig-tweak-2x#default-field-language.");
       }
 
     }

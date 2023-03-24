@@ -2,6 +2,7 @@
 
 namespace Drupal\openfed_svg_file\Plugin\Field\FieldFormatter;
 
+use DomDocument;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Plugin\Field\FieldFormatter\FileFormatterBase;
@@ -70,7 +71,7 @@ class OpenfedSvgFileFormatter extends FileFormatterBase {
           $svg_data = NULL;
           $svg_file = file_exists($uri) ? file_get_contents($uri) : NULL;
           if ($svg_file) {
-            $dom = new \DomDocument();
+            $dom = new DomDocument();
             libxml_use_internal_errors(TRUE);
             $dom->loadXML($svg_file);
             if (isset($dom->documentElement)) {

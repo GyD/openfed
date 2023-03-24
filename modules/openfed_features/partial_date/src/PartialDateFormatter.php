@@ -2,8 +2,10 @@
 
 namespace Drupal\partial_date;
 
+use DateTimeZone;
 use Drupal\Core\Render\Markup;
 use Drupal\partial_date\Entity\PartialDateFormatInterface;
+use Exception;
 
 /**
  * Provides a default partial date formatter.
@@ -52,7 +54,7 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
             break;
 
           case 'estimate_range':
-            list($estimate_start, $estimate_end) = explode('|', $date[$type . '_estimate']);
+            [$estimate_start, $estimate_end] = explode('|', $date[$type . '_estimate']);
             $start = $this->formatComponent($type, [$type => $estimate_start] + $date, $format);
             $end = $this->formatComponent($type, [$type => $estimate_end], $format);
             if (strlen($start) && strlen($end)) {
@@ -212,11 +214,11 @@ class PartialDateFormatter implements PartialDateFormatterInterface {
 
       case 'T':
         try {
-          $tz = new \DateTimeZone($value);
+          $tz = new DateTimeZone($value);
           $transitions = $tz->getTransitions();
           return $transitions[0]['abbr'] . $suffix;
         }
-        catch (\Exception $e) {
+        catch (Exception $e) {
         }
         return '';
 
