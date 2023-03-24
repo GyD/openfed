@@ -12,17 +12,17 @@ function openfed_workflow_install() {
   // Discover all the module configurations that we'll use to override existing
   // ones.
   $module = basename(__FILE__, '.install');
-  $module_configs = \Drupal::configFactory()->listAll($module);
+  $module_configs = Drupal::configFactory()->listAll($module);
 
   // Overriding existing configurations.
   if (!empty($module_configs)) {
     foreach ($module_configs as $module_config_name) {
-      $config = \Drupal::configFactory()->getEditable($module_config_name);
+      $config = Drupal::configFactory()->getEditable($module_config_name);
       // All the configurations set in this module starting with the module name
       // are overrides of the an already existing config. Here we'll get the
       // exiting config name.
       $existing_config = str_replace($module . '.', '', $module_config_name);
-      $existing_config = \Drupal::configFactory()
+      $existing_config = Drupal::configFactory()
         ->getEditable($existing_config);
       $existing_config->setData($config->get())->save();
       // We don't need to keep this config.
@@ -36,7 +36,7 @@ function openfed_workflow_install() {
   $editor_new_permissions = [
     'use openfed_workflow transition review',
   ];
-  $config = \Drupal::configFactory()->getEditable($editor_role_conf);
+  $config = Drupal::configFactory()->getEditable($editor_role_conf);
   $config->set(
     'permissions',
     array_merge($config->get('permissions'), $editor_new_permissions)

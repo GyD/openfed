@@ -11,7 +11,7 @@ function openfed_multilingual_install() {
   // Enable content translation using the proper service before importing the
   // configurations. This will avoid wrong schemas after the import.
   /** @var \Drupal\content_translation\ContentTranslationManager $content_translation */
-  $content_translation = \Drupal::service('content_translation.manager');
+  $content_translation = Drupal::service('content_translation.manager');
 
   $translatables = [
     'node' => ['page'],
@@ -22,7 +22,7 @@ function openfed_multilingual_install() {
       try {
         $content_translation->setEnabled($entity_type, $bundle, 'true');
       }
-      catch (\LogicException $e) {
+      catch (LogicException $e) {
         // This likely means we are installing from configuration and the
         // appropriate configuration has not been installed yet.
       }
@@ -32,17 +32,17 @@ function openfed_multilingual_install() {
   // Discover all the module configurations that we'll use to override existing
   // ones.
   $module = basename(__FILE__, '.install');
-  $module_configs = \Drupal::configFactory()->listAll($module);
+  $module_configs = Drupal::configFactory()->listAll($module);
 
   // Overriding existing configurations.
   if (!empty($module_configs)) {
     foreach ($module_configs as $module_config_name) {
-      $config = \Drupal::configFactory()->getEditable($module_config_name);
+      $config = Drupal::configFactory()->getEditable($module_config_name);
       // All the configurations set in this module starting with the module name
       // are overrides of the an already existing config. Here we'll get the
       // exiting config name.
       $existing_config = str_replace($module . '.', '', $module_config_name);
-      $existing_config = \Drupal::configFactory()
+      $existing_config = Drupal::configFactory()
         ->getEditable($existing_config);
       $existing_config->setData($config->get())->save();
       // We don't need to keep this config.
@@ -51,7 +51,7 @@ function openfed_multilingual_install() {
   }
 
   // Set "/en" as the default path prefix for English language
-  \Drupal::configFactory()
+  Drupal::configFactory()
     ->getEditable('language.negotiation')
     ->set('url.prefixes.en', 'en')
     ->save(TRUE);

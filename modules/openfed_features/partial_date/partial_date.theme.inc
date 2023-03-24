@@ -18,7 +18,7 @@ use Drupal\Core\Cache\CacheableMetadata;
  */
 function template_preprocess_partial_date(array &$variables) {
   /** @var \Drupal\partial_date\PartialDateFormatterInterface $formatter */
-  $formatter = \Drupal::service('partial_date.formatter');
+  $formatter = Drupal::service('partial_date.formatter');
   /** @var \Drupal\partial_date\Entity\PartialDateFormatInterface $format */
   $format = $variables['format'];
 

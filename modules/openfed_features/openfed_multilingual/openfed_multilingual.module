@@ -13,7 +13,7 @@
  */
 function openfed_multilingual_language_switch_links_alter(array &$links, $type, $path) {
   /** @var Drupal\node\Entity\Node $node */
-  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+  if ($node = Drupal::routeMatch()->getParameter('node')) {
     foreach ($links as $langcode => $link) {
       if (
         $node

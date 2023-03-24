@@ -117,7 +117,7 @@ function partial_date_timezone_handling_correlation($timezone = '', $tz_handling
       return 'UTC';
 
     case 'site':
-      $config = \Drupal::config('system.date');
+      $config = Drupal::config('system.date');
       $default_timezone = $config->get('timezone.default');
       return !empty($default_timezone) ? $default_timezone : @date_default_timezone_get();
 

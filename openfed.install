@@ -15,7 +15,7 @@ function openfed_update_last_removed() {
  * This will content management view, unsetting broken bulk actions.
  */
 function openfed_update_91101() {
-  $config_factory = \Drupal::configFactory();
+  $config_factory = Drupal::configFactory();
   $config = $config_factory->getEditable('views.view.content');
   $original_config = $config->get('display.default.display_options.fields.node_bulk_form');
 
@@ -37,11 +37,11 @@ function openfed_update_91101() {
  */
 function openfed_update_91102() {
   // Load file entity handling functions.
-  \Drupal::moduleHandler()->loadInclude('file_entity', 'inc', 'file_entity.file');
+  Drupal::moduleHandler()->loadInclude('file_entity', 'inc', 'file_entity.file');
 
   // Load all files.
   /** @var \Drupal\file\FileInterface[] $files */
-  $files = \Drupal::entityTypeManager()
+  $files = Drupal::entityTypeManager()
     ->getStorage('file')
     ->loadByProperties(['type' => 'other']);
   //$file = reset($files) ?: NULL;
@@ -63,8 +63,8 @@ function openfed_update_91102() {
  */
 function openfed_update_91103() {
   // Load all pattern configuration entities.
-  foreach (\Drupal::configFactory()->listAll('pathauto.pattern.') as $pattern_config_name) {
-    $pattern_config = \Drupal::configFactory()->getEditable($pattern_config_name);
+  foreach (Drupal::configFactory()->listAll('pathauto.pattern.') as $pattern_config_name) {
+    $pattern_config = Drupal::configFactory()->getEditable($pattern_config_name);
 
     // Loop patterns and swap the node_type plugin by the entity_bundle:node
     // plugin.

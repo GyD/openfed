@@ -107,7 +107,7 @@ function openfed_form_install_configure_form_alter(array &$form, FormStateInterf
  */
 function openfed_form_install_configure_https(array &$form, FormStateInterface $form_state) {
   if ($form_state->getValue('disable_https_checkbox') != 1) {
-    \Drupal::service('module_installer')->install(['securelogin']);
+    Drupal::service('module_installer')->install(['securelogin']);
   }
 }
 

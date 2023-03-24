@@ -93,8 +93,8 @@ function openfed_administration_node_type_add_form_submit(array &$form, FormStat
   $bundle->save();
 
   // Add content moderation to the new content type.
-  \Drupal::service('openfed_administration.content_type_manager')->addWorkflowToBundle($bundle->id());
+  Drupal::service('openfed_administration.content_type_manager')->addWorkflowToBundle($bundle->id());
 
   // Add Permissions to the roles.
-  \Drupal::service('openfed_administration.content_type_manager')->assignPermissionsToRoles($bundle->id());
+  Drupal::service('openfed_administration.content_type_manager')->assignPermissionsToRoles($bundle->id());
 }
