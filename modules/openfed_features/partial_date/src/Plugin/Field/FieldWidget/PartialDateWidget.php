@@ -107,21 +107,21 @@ class PartialDateWidget extends WidgetBase implements ContainerFactoryPluginInte
       '#maxlength' => 255,
     ];
     if (!empty($this->getSetting('txt_long'))) {
-      $element['txt']['long'] = $txt_element + [
+      $element['txt']['long'] = [
         '#id' => 'txt_long',
         '#placeholder' => $help_txt['txt_long'],
         '#default_value' => $item->txt_long,
         '#size' => 80,
-      ];
+      ] + $txt_element;
     }
     if (!empty($this->getSetting('txt_short'))) {
-      $element['txt']['short'] = $txt_element + [
+      $element['txt']['short'] = [
         '#id' => 'txt_short',
         '#placeholder' => $help_txt['txt_short'],
         '#default_value' => $item->txt_short,
         '#maxlength' => 100,
         '#size' => 40,
-      ];
+      ] + $txt_element;
     }
 
     return $element;
