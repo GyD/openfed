@@ -163,7 +163,7 @@ class PartialDateRangeWidget extends PartialDateWidget {
   }
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
   protected function buildHelpTxtElement() {
     $element = parent::buildHelpTxtElement();

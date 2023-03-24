@@ -55,6 +55,7 @@ class SetupRolesForm extends FormBase {
 
   /**
    * @inheritDoc
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $roles = array_filter($form_state->getValue('role_list'));

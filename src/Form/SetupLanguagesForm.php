@@ -78,6 +78,7 @@ class SetupLanguagesForm extends FormBase {
 
   /**
    * {@inheritDoc}
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $regional_enabled = array_filter($form_state->getValue('regional_list'));

@@ -98,6 +98,8 @@ class SetupMenusForm extends FormBase {
    *   The custom menu description.
    * @param string $language
    *   The language code for the menu item.
+   *
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
   private function _openfed_create_custom_menu($menu_name, $title, $description = '', $language = 'en') {
     $menu = [];

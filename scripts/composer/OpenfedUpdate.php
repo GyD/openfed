@@ -31,6 +31,8 @@ class OpenfedUpdate {
    * Update current openfed project files.
    *
    * @param \Composer\Script\Event $event
+   *
+   * @throws \Exception
    */
   public static function update(Event $event) {
     self::_setLatestOpenfedVersion(self::$openfedRepo);

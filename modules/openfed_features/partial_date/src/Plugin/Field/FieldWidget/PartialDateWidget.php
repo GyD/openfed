@@ -234,6 +234,11 @@ class PartialDateWidget extends WidgetBase implements ContainerFactoryPluginInte
     return $elements;
   }
 
+  /**
+   * Build help text element.
+   *
+   * @return array
+   */
   protected function buildHelpTxtElement() {
     $element = [
       '#tree' => TRUE,

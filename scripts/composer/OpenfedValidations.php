@@ -20,6 +20,7 @@ class OpenfedValidations {
 
   /**
    *
+   * @throws \ErrorException
    */
   public static function validateUpdate810(Event $event) {
 
