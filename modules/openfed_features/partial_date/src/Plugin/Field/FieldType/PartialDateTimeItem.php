@@ -70,7 +70,7 @@ class PartialDateTimeItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
-  public static function schema(FieldStorageDefinitionInterface $field) {
+  public static function schema(FieldStorageDefinitionInterface $field_definition) {
     $schema = [
       'columns' => [
         'timestamp' => [
