@@ -12,8 +12,10 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_install_tasks().
+ *
+ * @return array[]
  */
-function openfed_install_tasks(array &$install_state) {
+function openfed_install_tasks() {
   return [
     'openfed_setup_languages' => [
       'display_name' => t('Set up languages'),
