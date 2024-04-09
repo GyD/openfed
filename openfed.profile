@@ -78,18 +78,18 @@ function openfed_form_install_configure_form_alter(array &$form, FormStateInterf
   $form['update_notifications']['update_status_module']['#default_value'] = [];
 
 
-  // Add an option to disable HTTPS.
-  $form['regional_settings']['disable_https_fieldset'] = [
-    '#type' => 'fieldset',
-    '#title' => t('Development settings'),
-    '#weight' => 10,
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  ];
-  $form['regional_settings']['disable_https_fieldset']['disable_https_checkbox'] = [
-    '#type' => 'checkbox',
-    '#title' => t('Disable HTTPS (for development only!)'),
-  ];
+  // // Add an option to disable HTTPS.
+  // $form['regional_settings']['disable_https_fieldset'] = [
+  //   '#type' => 'fieldset',
+  //   '#title' => t('Development settings'),
+  //   '#weight' => 10,
+  //   '#collapsible' => TRUE,
+  //   '#collapsed' => TRUE,
+  // ];
+  // $form['regional_settings']['disable_https_fieldset']['disable_https_checkbox'] = [
+  //   '#type' => 'checkbox',
+  //   '#title' => t('Disable HTTPS (for development only!)'),
+  // ];
 
   // Only check for updates, no need for email notifications
   $form['update_notifications']['update_status_module']['#default_value'] = [
@@ -97,19 +97,19 @@ function openfed_form_install_configure_form_alter(array &$form, FormStateInterf
     0,
   ];
 
-  $form['#submit'][] = 'openfed_form_install_configure_https';
+  // $form['#submit'][] = 'openfed_form_install_configure_https';
 
 
 }
 
-/**
- * Submit hook to set up HTTPS.
- */
-function openfed_form_install_configure_https(array &$form, FormStateInterface $form_state) {
-  if ($form_state->getValue('disable_https_checkbox') != 1) {
-    \Drupal::service('module_installer')->install(['securelogin']);
-  }
-}
+// /**
+//  * Submit hook to set up HTTPS.
+//  */
+// function openfed_form_install_configure_https(array &$form, FormStateInterface $form_state) {
+//   if ($form_state->getValue('disable_https_checkbox') != 1) {
+//     \Drupal::service('module_installer')->install(['securelogin']);
+//   }
+// }
 
 /**
  * Defines things to do after installation.
