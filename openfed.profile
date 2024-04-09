@@ -74,22 +74,21 @@ function openfed_form_install_configure_form_alter(array &$form, FormStateInterf
   $form['regional_settings']['site_default_country']['#default_value'] = 'BE';
   $form['regional_settings']['date_default_timezone']['#default_value'] = 'Europe/Brussels';
 
+  // Add an option to enable openfed_federalheader module.
+  $form['regional_settings']['optional_settings'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Optional settings'),
+    '#weight' => 10,
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  ];
+  $form['regional_settings']['optional_settings']['enable_federalheader'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Enable Openfed federal header module'),
+  ];
+
   // Don't check for updates and no need for email notifications
   $form['update_notifications']['update_status_module']['#default_value'] = [];
-
-
-  // // Add an option to disable HTTPS.
-  // $form['regional_settings']['disable_https_fieldset'] = [
-  //   '#type' => 'fieldset',
-  //   '#title' => t('Development settings'),
-  //   '#weight' => 10,
-  //   '#collapsible' => TRUE,
-  //   '#collapsed' => TRUE,
-  // ];
-  // $form['regional_settings']['disable_https_fieldset']['disable_https_checkbox'] = [
-  //   '#type' => 'checkbox',
-  //   '#title' => t('Disable HTTPS (for development only!)'),
-  // ];
 
   // Only check for updates, no need for email notifications
   $form['update_notifications']['update_status_module']['#default_value'] = [
@@ -97,19 +96,18 @@ function openfed_form_install_configure_form_alter(array &$form, FormStateInterf
     0,
   ];
 
-  // $form['#submit'][] = 'openfed_form_install_configure_https';
-
+  $form['#submit'][] = 'openfed_form_install_optional_settings';
 
 }
 
-// /**
-//  * Submit hook to set up HTTPS.
-//  */
-// function openfed_form_install_configure_https(array &$form, FormStateInterface $form_state) {
-//   if ($form_state->getValue('disable_https_checkbox') != 1) {
-//     \Drupal::service('module_installer')->install(['securelogin']);
-//   }
-// }
+/**
+ * Submit hook to set up HTTPS.
+ */
+function openfed_form_install_optional_settings(array &$form, FormStateInterface $form_state) {
+  if ($form_state->getValue('enable_federalheader') == 1) {
+    \Drupal::service('module_installer')->install(['openfed_federalheader']);
+  }
+}
 
 /**
  * Defines things to do after installation.
