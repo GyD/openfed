@@ -7,27 +7,8 @@ dependencies:
     - field.field.media.svg.field_svg
     - media.type.svg
   module:
-    - ds
     - openfed_svg_file
-third_party_settings:
-  ds:
-    layout:
-      id: ds_1col
-      library: null
-      disable_css: false
-      entity_classes: all_classes
-      settings:
-        wrappers:
-          ds_content: div
-        outer_wrapper: div
-        attributes: ''
-        link_attribute: ''
-        link_custom: ''
-        classes:
-          layout_class: {  }
-    regions:
-      ds_content:
-        - field_svg
+third_party_settings: { }
 id: media.svg.embed_entity
 targetEntityType: media
 bundle: svg
