@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f114ff066719d275433874c66d8bb1b",
+    "content-hash": "78d7e24ee5d22565b3416f7a35aa1093",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2902,30 +2902,29 @@
         },
         {
             "name": "drupal/ckeditor_abbreviation",
-            "version": "3.0.0",
+            "version": "4.0.0-alpha2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ckeditor_abbreviation.git",
-                "reference": "3.0.0"
+                "reference": "4.0.0-alpha2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ckeditor_abbreviation-3.0.0.zip",
-                "reference": "3.0.0",
-                "shasum": "ee8469b0b2e294f30808d24859ca31ef29c087de"
+                "url": "https://ftp.drupal.org/files/projects/ckeditor_abbreviation-4.0.0-alpha2.zip",
+                "reference": "4.0.0-alpha2",
+                "shasum": "ee6f19bf7356f65ba7743b2cb74677e7014d391d"
             },
             "require": {
-                "drupal/ckeditor": "*",
-                "drupal/core": "^10"
+                "drupal/core": "^9.5 || ^10"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.0.0",
-                    "datestamp": "1677863924",
+                    "version": "4.0.0-alpha2",
+                    "datestamp": "1706449566",
                     "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
                     }
                 }
             },
