@@ -75,26 +75,22 @@ function openfed_form_install_configure_form_alter(array &$form, FormStateInterf
   $form['regional_settings']['date_default_timezone']['#default_value'] = 'Europe/Brussels';
 
   // Add an option to enable openfed_federalheader module.
-  $form['regional_settings']['optional_settings'] = [
+  $form['regional_settings']['extra_settings'] = [
     '#type' => 'fieldset',
-    '#title' => t('Optional settings'),
+    '#title' => t('Extra settings'),
     '#weight' => 10,
-    '#collapsible' => TRUE,
+    '#collapsible' => FALSE,
     '#collapsed' => FALSE,
   ];
-  $form['regional_settings']['optional_settings']['enable_federalheader'] = [
+  $form['regional_settings']['extra_settings']['enable_federalheader'] = [
     '#type' => 'checkbox',
     '#title' => t('Enable Openfed federal header module'),
+    '#default_value' => 1
   ];
 
-  // Don't check for updates and no need for email notifications
-  $form['update_notifications']['update_status_module']['#default_value'] = [];
-
-  // Only check for updates, no need for email notifications
-  $form['update_notifications']['update_status_module']['#default_value'] = [
-    0,
-    0,
-  ];
+  // No check for updates, no need for email notifications
+  $form['update_notifications']['enable_update_status_module']['#default_value'] = 0;
+  $form['update_notifications']['enable_update_status_emails']['#default_value'] = 0;
 
   $form['#submit'][] = 'openfed_form_install_optional_settings';
 

@@ -59,22 +59,6 @@ class SetupMenusForm extends FormBase {
 
             // Create custom menus.
             $this->_openfed_create_custom_menu($menu_name, ucwords($menu_title), '', $lang);
-
-//            // Set block in region.
-//            switch ($menu_identity) {
-//              case 'menu-tools-menu':
-//              case 'menu-tools-' . $lang->name . '-menu':
-//                _openfed_set_block_into_region('menu', $menu_name, 'tools');
-//                break;
-//              case 'menu-footer-menu':
-//              case 'menu-footer-' . $lang->name . '-menu':
-//                _openfed_set_block_into_region('menu', $menu_name, 'footer');
-//                break;
-//            }
-//
-//            // Show block for language only.
-//            _openfed_show_block_for_language('menu', $menu_name, $lang->language);
-
           }
         }
       }

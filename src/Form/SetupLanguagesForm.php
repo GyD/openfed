@@ -46,6 +46,7 @@ class SetupLanguagesForm extends FormBase {
       means that for determining the language of a page, the following order will
       be used: 1. URL prefix, 2. Language cookie, 3. Language selection page.') . '</p><p>' .
         $this->t('Note this option is only relevant for sites using multiple languages.') . '</p>',
+      '#default_value' => 1,
     ];
 
     $form['actions'] = ['#type' => 'actions'];
