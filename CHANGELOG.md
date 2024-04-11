@@ -1,6 +1,21 @@
 CHANGELOG
 =========
 
+11 April 2024 - Version 12.2.0-beta1
+------------------------------
+- Update Drupal core to version 10.2.x
+- Updated contrib modules
+- Update default config install to use core allowed_formats
+- Add update hook for allowed_formats
+- Add post_update to disable allowed_formats module
+- Add patch for alertbox D10 compatibility
+- Add patch for leaflet_maptiler compatibility with latest leaflet
+- Add validation script to check for deprecated twig functions
+- Remove Openfed install dependency on several modules
+- Add an installation option for Openfed federal header module
+- Remove installation option for securelogin
+- Cleanup code
+
 29 November 2023 - Version 12.1.0
 ------------------------------
 
