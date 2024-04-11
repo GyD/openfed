@@ -42,6 +42,8 @@ class OpenfedValidations {
     // before updating to this version.
     self::checkDeprecatedThemes($event->getArguments());
 
+    // Some theme functions were removed and should be checked.
+    self::checkDeprecatedTwigFunctions($event->getArguments());
 
     shell_exec('drush cr');
   }
@@ -142,6 +144,22 @@ class OpenfedValidations {
     // Re-run to make sure module was disabled.
     if ($recheck) {
       self::checkDeprecatedThemes();
+    }
+  }
+
+  /**
+   * Checks if deprecated twig functions are used and stops update if true.
+   *
+   * @throws \ErrorException
+   *   Exception when deprecated twig functions are used.
+   */
+  private static function checkDeprecatedTwigFunctions($arguments = []) {
+    // 1. Check spaceless usage.
+    // See https://www.drupal.org/project/drupal/issues/3094850
+    $search = shell_exec('find ./docroot/themes/ -name "*.twig" | xargs grep -hi "endspaceless"');
+    // If search has a match, we should prevent update.
+    if (!empty($search)) {
+      throw new \ErrorException("Your theme has references to spaceless, which was removed in Twig 3. See https://www.drupal.org/project/drupal/issues/3094850.");
     }
   }
 
