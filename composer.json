@@ -88,6 +88,9 @@
             }
         },
         "patches": {
+            "drupal/alertbox": {
+                "Issue #3384311: Drupal 10 compatibility incomplete": "https://www.drupal.org/files/issues/2023-08-30/Fix_D10_requirement_issue.patch"
+            },
             "drupal/block_content_permissions": {
                 "Issue #2920739: Allow accessing the \"Custom block library\" page without \"Administer blocks\" permission": "https://www.drupal.org/files/issues/2023-01-09/block_content_permissions-access_listing_page-2920739-59.patch"
             },
@@ -121,6 +124,9 @@
             },
             "drupal/inline_entity_form": {
                 "Issue #2822764: Support adding new entities when translating": "https://www.drupal.org/files/issues/2022-07-20/2822764-89.patch"
+            },
+            "drupal/leaflet_maptiler": {
+                "Issue #3436252: Too few arguments to function Drupal\\leaflet\\LeafletService::__construct()": "https://www.drupal.org/files/issues/2024-03-26/leaflet_maptiler-too_few_arguments-3436252-2.patch"
             },
             "drupal/menu_block": {
                 "Issue #3089134: Ability to display the menu selected by the page": "https://www.drupal.org/files/issues/2022-03-24/3089134-26.patch"
