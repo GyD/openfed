@@ -4,6 +4,9 @@
  * Install, uninstall and update hooks for Openfed.
  */
 
+use Drupal\Core\Config\Entity\ConfigEntityUpdater;
+use Drupal\field\FieldConfigInterface;
+
 /**
  * This will content management view, unsetting broken bulk actions.
  */
@@ -38,4 +41,45 @@ function openfed_update_101204() {
     $config->set('enabled_entity_types', $enabled_entity_types);
     $config->save();
   }
+}
+
+/**
+ * Process allowed formats to provide a fix for the post update task
+ * allowed_formats_post_update_formats2core.
+ *
+ * This hook will provide a fix for Openfed 12.1.x projects which were using
+ * allowed_formats 2.x along with core allowed_formats. These projects may've
+ * been using core allowed_formats already and, without this update, the
+ * allowed_formats 3.x module will erase existing settings.
+ *
+ * This makes the allowed_formats_post_update_formats2core obsolete.
+ */
+function openfed_update_101205(&$sandbox) {
+  \Drupal::classResolver(ConfigEntityUpdater::class)->update($sandbox, 'field_config', function (FieldConfigInterface $field_config): bool {
+    // Can't use $field_config->getThirdPartySettings() because that doesn't
+    // reveal if allowed_formats module key exists. If the module key exists, even
+    // if it's empty, we want to remove it.
+    if (!array_key_exists('allowed_formats', $field_config->getSettings() ?? []) || !array_key_exists('allowed_formats', $field_config->get('third_party_settings') ?? [])) {
+      return FALSE;
+    }
+
+    // Get the core and contrib allowed_formats allowed formats.
+    $allowed_formats_contrib = array_values(array_filter($field_config->getThirdPartySetting('allowed_formats', 'allowed_formats', [])));
+    $allowed_formats_core = $field_config->getSetting('allowed_formats');
+
+    // Let's merge both contrib and core formats.
+    $allowed_formats = array_merge($allowed_formats_contrib, $allowed_formats_core);
+
+    // If there are core allowed formats, set the settings with it and unset the
+    // old third party settings value.
+    if ($allowed_formats && !empty($allowed_formats)) {
+      $field_config
+        ->setSetting('allowed_formats', $allowed_formats)
+        ->unsetThirdPartySetting('allowed_formats', 'allowed_formats');
+
+      return TRUE;
+    }
+
+    return FALSE;
+  });
 }
