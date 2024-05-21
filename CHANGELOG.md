@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-11 April 2024 - Version 12.2.0-beta1
+21 May 2024 - Version 12.2.0
 ------------------------------
 - Update Drupal core to version 10.2.x
 - Updated contrib modules
