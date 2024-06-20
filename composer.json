@@ -252,7 +252,7 @@
         "drupal/menu_firstchild": "2.1.0",
         "drupal/menu_link": "2.0.5",
         "drupal/menu_link_field_attributes": "2.0.0-beta2",
-        "drupal/menu_link_weight": "2.0-alpha5",
+        "drupal/menu_link_weight": "2.0-alpha6",
         "drupal/menu_trail_by_path": "2.0.1",
         "drupal/metatag": "2.0.0",
         "drupal/moderated_content_bulk_publish": "2.0.31",
