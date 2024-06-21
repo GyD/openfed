@@ -51,7 +51,7 @@ type_settings:
         - draft
         - published
       to: published
-      weight: 0
+      weight: 1
   entity_types:
     media:
       - iframe
