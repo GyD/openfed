@@ -1,4 +1,4 @@
 services:
   openfed_administration.content_type_manager:
     class: Drupal\openfed_administration\Service\ContentTypeManager
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@content_translation.manager']
