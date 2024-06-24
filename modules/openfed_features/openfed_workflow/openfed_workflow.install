@@ -11,35 +11,102 @@ function openfed_workflow_install() {
   // Discover all the module configurations that we'll use to override existing
   // ones.
   $module = basename(__FILE__, '.install');
-  $module_configs = \Drupal::configFactory()->listAll($module);
+  // Get the config factory service.
+  $config_factory = \Drupal::configFactory();
+  $module_configs = $config_factory->listAll($module);
+
+  // Defines the set of permissions related to the openfed_workflow module that
+  // we want to grant to content editors and content authors.
+  $editor_new_permissions = [
+    'use openfed_workflow transition archive',
+    'use openfed_workflow transition drafting',
+    'use openfed_workflow transition review',
+  ];
 
   // Overriding existing configurations.
   if (!empty($module_configs)) {
     foreach ($module_configs as $module_config_name) {
-      $config = \Drupal::configFactory()->getEditable($module_config_name);
+      $config = $config_factory->getEditable($module_config_name);
       // All the configurations set in this module starting with the module name
-      // are overrides of the an already existing config. Here we'll get the
-      // exiting config name.
+      // are overrides of an already existing config. Here we'll get the
+      // existing config name.
       $existing_config = str_replace($module . '.', '', $module_config_name);
-      $existing_config = \Drupal::configFactory()
-        ->getEditable($existing_config);
-      $existing_config->setData($config->get())->save();
+      $existing_config = $config_factory->getEditable($existing_config);
+
+      if ($existing_config->isNew()) {
+        $existing_config->setData($config->get())->save();
+        // We don't need to keep this config.
+        $config->delete();
+        continue;
+      }
+
+      switch ($existing_config->getName()) {
+        case 'user.role.content_author':
+          // Combine author's existing permissions with the new set of
+          // permissions related to openfed_workflow, ensuring uniqueness to
+          // avoid duplicates.
+          $existing_config->set(
+            'permissions',
+            array_unique(array_merge($existing_config->get('permissions'), $editor_new_permissions))
+          );
+          break;
+
+        case 'workflows.workflow.openfed_workflow':
+          $type_settings = $config->get('type_settings');
+          $existing_type_settings = $existing_config->get('type_settings');
+
+          // Make sure we re-create missing states.
+          foreach ($type_settings['states'] as $state_name => $state_settings) {
+            if (!array_key_exists($state_name, $existing_type_settings['states'])) {
+              $existing_type_settings['states'][$state_name] = $state_settings;
+            }
+          }
+
+          // Re-creates 'review' transition.
+          if (!array_key_exists('review', $existing_type_settings['transitions'])) {
+            // Adds 'needs_review' state if it doesn't exist.
+            if (!array_key_exists('needs_review', $existing_type_settings['states'])) {
+              $existing_type_settings['states']['needs_review'] = $type_settings['states']['needs_review'];
+            }
+            // Make sure all transitions can be moved from 'needs_review'
+            // state. In addition, we re-create any missing transitions needed
+            // for openfed_workflow.
+            foreach ($type_settings['transitions'] as $transition_name => $transition_settings) {
+              if ($transition_name === 'review') {
+                continue;
+              }
+              if (
+                array_key_exists($transition_name, $existing_type_settings['transitions']) &&
+                !in_array('needs_review', $existing_type_settings['transitions'][$transition_name]['from'])
+              ) {
+                $existing_type_settings['transitions'][$transition_name]['from'][] = 'needs_review';
+              }
+              elseif (!array_key_exists($transition_name, $existing_type_settings['transitions'])) {
+                $existing_type_settings['transitions'][$transition_name] = $transition_settings;
+              }
+            }
+            // Adds 'review' transition.
+            $existing_type_settings['transitions']['review'] = $type_settings['transitions']['review'];
+            // Updates existing config.
+            $existing_config->set('type_settings', $existing_type_settings);
+          }
+          break;
+      }
+
+      $existing_config->save();
       // We don't need to keep this config.
       $config->delete();
     }
   }
 
-  // For content editors, we just need to add a new permission for Needs Review
-  // new state.
+  // Combine content editor's existing permissions with the new set of
+  // permissions related to openfed_workflow, ensuring uniqueness to avoid
+  // duplicates.
   $editor_role_conf = 'user.role.content_editor';
-  $editor_new_permissions = array(
-    'use openfed_workflow transition review',
-  );
   $config = \Drupal::configFactory()->getEditable($editor_role_conf);
   $config->set(
     'permissions',
-    array_merge($config->get('permissions'), $editor_new_permissions)
+    array_unique(array_merge($config->get('permissions'), $editor_new_permissions))
   );
   $config->save();
-
 }

@@ -82,21 +82,9 @@ class SetupRolesForm extends FormBase {
 
     // Check selected workflow options to enable role and set configuration.
     if (!empty($workflow_option) && $workflow_option == Helper::WORKFLOW_ADVANCED_CONFIG) {
-      // Enable Content Author role.
-      $content_author_role_id = Helper::CONTENT_AUTHOR_ROLE_ID;
-      $content_author_role = [
-        'id' => $content_author_role_id,
-        'label' => $openfed_roles[$content_author_role_id]['label'],
-        'langcode' => 'en',
-        'status' => 1,
-        'weight' => $openfed_roles[$content_author_role_id]['weight'],
-        'permissions' => ['use text format flexible_html'],
-      ];
-      // Create role.
-      if (!Role::load($content_author_role['id'])) {
-        Role::create($content_author_role)->save();
-      }
-
+      // Remove the default openfed_workflow configuration to be re-created
+      // during install process of openfed_workflow module.
+      \Drupal::configFactory()->getEditable('workflows.workflow.openfed_workflow')->delete();
       // Enable Advanced Workflow configuration.
       \Drupal::service('module_installer')->install(['openfed_workflow']);
     }
