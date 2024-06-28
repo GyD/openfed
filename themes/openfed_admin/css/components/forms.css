@@ -1,1 +1,5 @@
 /*! Compiled SASS file | Do NOT modify from here !*/form.block-content-form .field--widget-multiselect{clear:both;overflow:hidden}form.block-content-form .field--widget-multiselect .description{clear:both}form.block-content-form .field--name-body{clear:both}form.node-form .field--widget-multiselect{clear:both;overflow:hidden}form.node-form .field--widget-multiselect .description{clear:both}form.node-form .field--name-body{clear:both}
+form.node-form .layout-node-form .layout-region--node-main,
+form.node-form .layout-node-form .layout-region--node-footer {width: auto; margin: 0;}
+form.node-form .layout-node-form .layout-region--node-main .claro-details__wrapper {margin-right: 0; margin-left: 0;}
+form.node-form .layout-node-form .layout-region--node-main .horizontal-tabs-panes .horizontal-tabs-pane {box-sizing: border-box;}
