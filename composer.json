@@ -136,8 +136,8 @@
                 "Issue #3099308: Menu Trail by Path: several issues": "https://www.drupal.org/files/issues/2024-01-26/menu_trail_by_path_issues-3099308-16.patch"
             },
             "drupal/page_manager": {
-                "Issue #2820218: Page manager does not respect existing route defaults for title callbacks": "https://www.drupal.org/files/issues/2018-03-21/2820218-50.patch",
-                "Issue #2858877: Allow for block visibility rules": "https://www.drupal.org/files/issues/2022-11-15/page_manager-block_visibility_conditions-2858877-71.patch"
+                "Issue #2665328: Fix Variants take entity label, not the variant title": "https://www.drupal.org/files/issues/2022-11-17/2665328-125-page_manager_variant_title.patch",
+                "Issue #2858877: Allow for block visibility rules": "https://git.drupalcode.org/project/page_manager/-/merge_requests/24.patch"
             },
             "drupal/panels": {
                 "Issue #3183258: Block visibility conditions and Custom attributes combined patch for composer": "https://www.drupal.org/files/issues/2022-12-08/combined-6.patch"
