@@ -327,7 +327,8 @@
         "w8tcha/codemirror": "1.17.12",
         "smillart/wai-aria-patterns-and-widgets": "1.0.*",
         "splidejs/splide": "^4.1",
-        "ten1seven/what-input": "^5.2"
+        "ten1seven/what-input": "^5.2",
+        "drupal/twig_real_content": "1.0.*"
     },
     "require-dev": {
         "drupal/coder": "8.*",
