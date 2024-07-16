@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e41c0799bc890135c254fe713232ec5f",
+    "content-hash": "39a6f209b3e443ed69fe07a5a3bba28c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -645,16 +645,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.4.0",
+            "version": "3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "35e8d0af4486141bc745f23a29cc2091eb624a32"
+                "reference": "c51258e759afdb17f1fd1fe83bc12baaef6309d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/35e8d0af4486141bc745f23a29cc2091eb624a32",
-                "reference": "35e8d0af4486141bc745f23a29cc2091eb624a32",
+                "url": "https://api.github.com/repos/composer/semver/zipball/c51258e759afdb17f1fd1fe83bc12baaef6309d6",
+                "reference": "c51258e759afdb17f1fd1fe83bc12baaef6309d6",
                 "shasum": ""
             },
             "require": {
@@ -706,7 +706,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.4.0"
+                "source": "https://github.com/composer/semver/tree/3.4.2"
             },
             "funding": [
                 {
@@ -722,7 +722,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-31T09:50:34+00:00"
+            "time": "2024-07-12T11:35:52+00:00"
         },
         {
             "name": "consolidation/annotated-command",
@@ -7399,17 +7399,17 @@
         },
         {
             "name": "drupal/leaflet",
-            "version": "10.2.19",
+            "version": "10.2.20",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/leaflet.git",
-                "reference": "10.2.19"
+                "reference": "10.2.20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.19.zip",
-                "reference": "10.2.19",
-                "shasum": "6ad48c4c3730adf0e9e6cda811b706181f8275a7"
+                "url": "https://ftp.drupal.org/files/projects/leaflet-10.2.20.zip",
+                "reference": "10.2.20",
+                "shasum": "0998b9bb5e6ca22a6125a46321542a19ca1ca8e6"
             },
             "require": {
                 "drupal/core": "^9.3 || ^10 || ^11",
@@ -7418,8 +7418,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "10.2.19",
-                    "datestamp": "1719911106",
+                    "version": "10.2.20",
+                    "datestamp": "1720793068",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -11556,20 +11556,20 @@
         },
         {
             "name": "drupal/webform",
-            "version": "6.2.3",
+            "version": "6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "6.2.3"
+                "reference": "6.2.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-6.2.3.zip",
-                "reference": "6.2.3",
-                "shasum": "b23b2746643ef11ee764ac420a02e2162d727930"
+                "url": "https://ftp.drupal.org/files/projects/webform-6.2.5.zip",
+                "reference": "6.2.5",
+                "shasum": "84d43a7c35339e831dcb762002164ba1cbbc5d80"
             },
             "require": {
-                "drupal/core": "^9.4 || ^10",
+                "drupal/core": "^10.1",
                 "php": ">=8.1"
             },
             "require-dev": {
@@ -11586,6 +11586,7 @@
                 "drupal/group": "1.x-dev",
                 "drupal/hal": "1 - 2",
                 "drupal/jquery_ui": "1.x-dev",
+                "drupal/jquery_ui_button": "2.x-dev",
                 "drupal/jquery_ui_checkboxradio": "2.x-dev",
                 "drupal/jquery_ui_datepicker": "2.x-dev",
                 "drupal/mailsystem": "4.x-dev",
@@ -11609,14 +11610,14 @@
                 "drupal/webform_ui": "*"
             },
             "suggest": {
-                "drupal/jquery_ui_checkboxradio": "Provides jQuery UI Checkboxradio library. Required by the Webform jQueryUI Buttons module. The Webform jQueryUI Buttons module is deprecated because jQueryUI is no longer maintained.",
+                "drupal/jquery_ui_buttons": "Provides jQuery UI Checkboxradio library. Required by the Webform jQueryUI Buttons module. The Webform jQueryUI Buttons module is deprecated because jQueryUI is no longer maintained.",
                 "drupal/jquery_ui_datepicker": "Provides jQuery UI Datepicker library. Required to support datepickers. The Webform jQueryUI Datepicker module is deprecated because jQueryUI is no longer maintained."
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.2.3",
-                    "datestamp": "1719431562",
+                    "version": "6.2.5",
+                    "datestamp": "1721065379",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -14004,20 +14005,21 @@
         },
         {
             "name": "openfed/kiso",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openfed/kiso.git",
-                "reference": "4035ba060c47c11854e77892336c22ac1d714fec"
+                "reference": "7fd69560a5766b9e277e792754cec6292ed47cb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openfed/kiso/zipball/4035ba060c47c11854e77892336c22ac1d714fec",
-                "reference": "4035ba060c47c11854e77892336c22ac1d714fec",
+                "url": "https://api.github.com/repos/openfed/kiso/zipball/7fd69560a5766b9e277e792754cec6292ed47cb1",
+                "reference": "7fd69560a5766b9e277e792754cec6292ed47cb1",
                 "shasum": ""
             },
             "require": {
-                "drupal/core": "^9 || ^10"
+                "drupal/core": "^9 || ^10",
+                "drupal/twig_real_content": "^1.0"
             },
             "type": "drupal-theme",
             "notification-url": "https://packagist.org/downloads/",
@@ -14033,9 +14035,9 @@
             "description": "Drupal Kiso (基礎) base theme for Drupal 9/10 themes",
             "support": {
                 "issues": "https://github.com/openfed/kiso/issues",
-                "source": "https://github.com/openfed/kiso/tree/3.0.2"
+                "source": "https://github.com/openfed/kiso/tree/3.0.3"
             },
-            "time": "2024-01-12T15:41:55+00:00"
+            "time": "2024-07-12T13:43:17+00:00"
         },
         {
             "name": "oscarotero/html-parser",
@@ -15820,16 +15822,16 @@
         },
         {
             "name": "simplesamlphp/simplesamlphp-assets-base",
-            "version": "v2.2.4",
+            "version": "v2.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplesamlphp/simplesamlphp-assets-base.git",
-                "reference": "c225323e3f8aa2a67b5d05ca93082a203da3c9e3"
+                "reference": "f48377e3ce2dbe4f535da4d9bbe088df77c04074"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp-assets-base/zipball/c225323e3f8aa2a67b5d05ca93082a203da3c9e3",
-                "reference": "c225323e3f8aa2a67b5d05ca93082a203da3c9e3",
+                "url": "https://api.github.com/repos/simplesamlphp/simplesamlphp-assets-base/zipball/f48377e3ce2dbe4f535da4d9bbe088df77c04074",
+                "reference": "f48377e3ce2dbe4f535da4d9bbe088df77c04074",
                 "shasum": ""
             },
             "require": {
@@ -15850,9 +15852,9 @@
             "description": "Assets for the SimpleSAMLphp main repository",
             "support": {
                 "issues": "https://github.com/simplesamlphp/simplesamlphp-assets-base/issues",
-                "source": "https://github.com/simplesamlphp/simplesamlphp-assets-base/tree/v2.2.4"
+                "source": "https://github.com/simplesamlphp/simplesamlphp-assets-base/tree/v2.2.5"
             },
-            "time": "2024-07-04T07:22:08+00:00"
+            "time": "2024-07-14T01:06:27+00:00"
         },
         {
             "name": "smillart/wai-aria-patterns-and-widgets",

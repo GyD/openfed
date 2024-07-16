@@ -87,7 +87,8 @@ install:
   - search_api_attachments:search_api_attachments
   - search_api_solr:search_api_solr
   - seckit:seckit
-  - smart_trim:smart_trim 
+  - smart_trim:smart_trim
+  - twig_real_content:twig_real_content
   - yoast_seo:yoast_seo
 
 themes:
