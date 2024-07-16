@@ -2,6 +2,7 @@
 
 namespace Drupal\openfed_administration\Service;
 
+use Drupal\content_translation\ContentTranslationManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 /**
@@ -17,13 +18,24 @@ class ContentTypeManager {
   protected $entityTypeManager;
 
   /**
+   * The content translation manager.
+   *
+   * @var \Drupal\content_translation\ContentTranslationManagerInterface
+   */
+  protected $contentTranslationManager;
+
+  /**
    * Constructs a ContentTypeManager object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
+   *
+   * @param ContentTranslationManagerInterface $content_translation_manager
+   *   The content translation manager.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, ContentTranslationManagerInterface $content_translation_manager) {
     $this->entityTypeManager = $entity_type_manager;
+    $this->contentTranslationManager = $content_translation_manager;
   }
 
   /**
@@ -84,6 +96,16 @@ class ContentTypeManager {
       $role->save();
     }
 
+  }
+
+  /**
+   * Enables translation for a node type.
+   *
+   * @param string $content_type_name
+   *   The machine name of the content type.
+   */
+  public function enableTranslation($content_type_name) {
+    $this->contentTranslationManager->setEnabled('node', $content_type_name, TRUE);
   }
 
 }
