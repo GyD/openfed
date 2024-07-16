@@ -1,6 +1,21 @@
 CHANGELOG
 =========
 
+16 July 2024 - Version 12.2.1
+------------------------------
+Several fixes and updates:
+- Issue #31: Default Workflow overriden when enabling Openfed Workflow module
+- Issue #42: update page_manager patches to fix page title
+- Issue #65: issue creating a new content type using default config
+- Issue #70: fix Claro issues
+- Enable drupal/twig_real_content to be used with Kiso (Kiso issue 64)
+- Updates due to psa-2024-06-26
+- Remove leftover config for display suite
+- Update leaflet_maptiler module to version 2.0.0
+- Update menu_link_weight module to version 2.0-alpha6
+- Add translatable_menu_link_uri module
+- Add drupal/twig_real_content
+
 22 May 2024 - Version 12.2.0
 ------------------------------
 First stable release of version 12.2
