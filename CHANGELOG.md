@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+17 July 2024 - Version 12.2.2
+------------------------------
+- Add hook_update to install twig_real_content on existing projects, due to the new dependency
+
 16 July 2024 - Version 12.2.1
 ------------------------------
 Several fixes and updates:
