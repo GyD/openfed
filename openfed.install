@@ -83,3 +83,13 @@ function openfed_update_101205(&$sandbox) {
     return FALSE;
   });
 }
+
+/**
+ * Install twig_real_content module.
+ */
+function openfed_update_101206(&$sandbox) {
+  if (!\Drupal::moduleHandler()->moduleExists('twig_real_content')) {
+    $installer = \Drupal::service('module_installer');
+    $installer->install(['twig_real_content']);
+  }
+}
