@@ -135,6 +135,9 @@
             "drupal/menu_trail_by_path": {
                 "Issue #3099308: Menu Trail by Path: several issues": "https://www.drupal.org/files/issues/2024-01-26/menu_trail_by_path_issues-3099308-16.patch"
             },
+            "drupal/metatag": {
+                "Issue #3469872: Site name not translated on Webforms": "https://www.drupal.org/files/issues/2024-08-23/metatag-issues-with-webform-translations-3469872-3.patch"
+            },
             "drupal/page_manager": {
                 "Issue #2665328: Fix Variants take entity label, not the variant title": "https://www.drupal.org/files/issues/2022-11-17/2665328-125-page_manager_variant_title.patch",
                 "Issue #2858877: Allow for block visibility rules": "https://git.drupalcode.org/project/page_manager/-/merge_requests/24.patch"
@@ -255,7 +258,7 @@
         "drupal/menu_link_field_attributes": "2.0.0-beta2",
         "drupal/menu_link_weight": "2.0-alpha6",
         "drupal/menu_trail_by_path": "2.0.1",
-        "drupal/metatag": "2.0.0",
+        "drupal/metatag": "2.0.2",
         "drupal/moderated_content_bulk_publish": "2.0.31",
         "drupal/multiselect": "2.0.0-beta4",
         "drupal/nocurrent_pass": "2.0.0",
