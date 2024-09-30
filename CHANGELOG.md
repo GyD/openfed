@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+30 September 2024 - Version 12.2.3
+------------------------------
+- Partially revert commit b6734ed, which introduced issues when uploading new media items for new installations
+- Add ckeditor5_paste_filter module
+- Add metatag module patch for issue 3469872
+- Add Orejime Video to Openfed
+- Add and enable media_library_edit module
+
+
 17 July 2024 - Version 12.2.2
 ------------------------------
 - Add hook_update to install twig_real_content on existing projects, due to the new dependency
