@@ -1,5 +1,4 @@
 enabled_entity_types:
-  - file
   - user
 punctuation:
   double_quotes: 0
