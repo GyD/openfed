@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "854ada522ed68e207783ca07cf3857df",
+    "content-hash": "491ee6386c05e431cde2d49c3965e206",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3880,7 +3880,7 @@
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "11.0.4",
+            "version": "11.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -3924,7 +3924,7 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/11.0.4"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/11.0.5"
             },
             "time": "2024-08-22T14:31:26+00:00"
         },
@@ -4558,7 +4558,7 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "Junyor",
+                    "name": "junyor",
                     "homepage": "https://www.drupal.org/user/7006"
                 },
                 {
@@ -8364,17 +8364,17 @@
         },
         {
             "name": "drupal/menu_link_field_attributes",
-            "version": "2.0.0-beta2",
+            "version": "2.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/menu_link_field_attributes.git",
-                "reference": "2.0.0-beta2"
+                "reference": "2.0.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/menu_link_field_attributes-2.0.0-beta2.zip",
-                "reference": "2.0.0-beta2",
-                "shasum": "f528e6ad013013cf70b6809052b554b81f9d0d98"
+                "url": "https://ftp.drupal.org/files/projects/menu_link_field_attributes-2.0.0-beta3.zip",
+                "reference": "2.0.0-beta3",
+                "shasum": "3b2c075f50b2b5ab9e8060c9703eeb385a6ec204"
             },
             "require": {
                 "drupal/core": "^9 || ^10"
@@ -8382,8 +8382,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.0-beta2",
-                    "datestamp": "1705675677",
+                    "version": "2.0.0-beta3",
+                    "datestamp": "1726835622",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -14941,16 +14941,16 @@
         },
         {
             "name": "php-http/message",
-            "version": "1.16.1",
+            "version": "1.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/message.git",
-                "reference": "5997f3289332c699fa2545c427826272498a2088"
+                "reference": "06dd5e8562f84e641bf929bfe699ee0f5ce8080a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/message/zipball/5997f3289332c699fa2545c427826272498a2088",
-                "reference": "5997f3289332c699fa2545c427826272498a2088",
+                "url": "https://api.github.com/repos/php-http/message/zipball/06dd5e8562f84e641bf929bfe699ee0f5ce8080a",
+                "reference": "06dd5e8562f84e641bf929bfe699ee0f5ce8080a",
                 "shasum": ""
             },
             "require": {
@@ -15004,9 +15004,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/message/issues",
-                "source": "https://github.com/php-http/message/tree/1.16.1"
+                "source": "https://github.com/php-http/message/tree/1.16.2"
             },
-            "time": "2024-03-07T13:22:09+00:00"
+            "time": "2024-10-02T11:34:13+00:00"
         },
         {
             "name": "php-http/promise",
