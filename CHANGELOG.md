@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+03 October 2024 - Version 12.2.4
+------------------------------
+- Update the version of menu_link_field_attributes module.
+
+
 30 September 2024 - Version 12.2.3
 ------------------------------
 - Partially revert commit b6734ed, which introduced issues when uploading new media items for new installations
