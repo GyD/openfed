@@ -285,7 +285,7 @@
         "drupal/search_api_attachments": "9.0.2",
         "drupal/search_api_autocomplete": "1.8",
         "drupal/search_api_solr": "4.3.2",
-        "drupal/seckit": "2.0.1",
+        "drupal/seckit": "2.0.*",
         "drupal/securelogin": "1.14",
         "drupal/simple_sitemap": "4.1.9",
         "drupal/simplesamlphp_auth": "4.0.0",
