@@ -3717,16 +3717,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "10.2.8",
+            "version": "10.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "74106472294be770cb76d93bb5a239f7ce741716"
+                "reference": "cc654a9fd9d7b149b9c554a9114610681a22c343"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/74106472294be770cb76d93bb5a239f7ce741716",
-                "reference": "74106472294be770cb76d93bb5a239f7ce741716",
+                "url": "https://api.github.com/repos/drupal/core/zipball/cc654a9fd9d7b149b9c554a9114610681a22c343",
+                "reference": "cc654a9fd9d7b149b9c554a9114610681a22c343",
                 "shasum": ""
             },
             "require": {
@@ -3874,9 +3874,9 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/10.2.8"
+                "source": "https://github.com/drupal/core/tree/10.2.10"
             },
-            "time": "2024-09-11T16:27:41+00:00"
+            "time": "2024-10-16T00:22:27+00:00"
         },
         {
             "name": "drupal/core-composer-scaffold",
@@ -3930,16 +3930,16 @@
         },
         {
             "name": "drupal/core-recommended",
-            "version": "10.2.8",
+            "version": "10.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "9880260a404d28578cb23dcc104fc5d37dc9dc6f"
+                "reference": "92d4eda171aba18bd1d6b2a3837f16d3f3e3e95b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/9880260a404d28578cb23dcc104fc5d37dc9dc6f",
-                "reference": "9880260a404d28578cb23dcc104fc5d37dc9dc6f",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/92d4eda171aba18bd1d6b2a3837f16d3f3e3e95b",
+                "reference": "92d4eda171aba18bd1d6b2a3837f16d3f3e3e95b",
                 "shasum": ""
             },
             "require": {
@@ -3948,7 +3948,7 @@
                 "doctrine/annotations": "~1.14.3",
                 "doctrine/deprecations": "~1.1.2",
                 "doctrine/lexer": "~2.1.0",
-                "drupal/core": "10.2.8",
+                "drupal/core": "10.2.10",
                 "egulias/email-validator": "~4.0.2",
                 "guzzlehttp/guzzle": "~7.8.1",
                 "guzzlehttp/promises": "~2.0.2",
@@ -4009,9 +4009,9 @@
             ],
             "description": "Core and its dependencies with known-compatible minor versions. Require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/10.2.8"
+                "source": "https://github.com/drupal/core-recommended/tree/10.2.10"
             },
-            "time": "2024-09-11T16:27:41+00:00"
+            "time": "2024-10-16T00:22:27+00:00"
         },
         {
             "name": "drupal/country",
@@ -5466,28 +5466,28 @@
         },
         {
             "name": "drupal/facets",
-            "version": "2.0.7",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/facets.git",
-                "reference": "2.0.7"
+                "reference": "2.0.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/facets-2.0.7.zip",
-                "reference": "2.0.7",
-                "shasum": "a58ad0c4c3fc2750bf095232a54218ae906852e3"
+                "url": "https://ftp.drupal.org/files/projects/facets-2.0.9.zip",
+                "reference": "2.0.9",
+                "shasum": "54512df3448c2464ef2bee7eefa825115562c9d5"
             },
             "require": {
-                "drupal/core": "^9.3 || ^10.0"
+                "drupal/core": "^10 || ^11"
             },
             "conflict": {
-                "drupal/search_api": "<1.14"
+                "drupal/search_api": "<1.30"
             },
             "require-dev": {
-                "drupal/jquery_ui_slider": "~2.0",
-                "drupal/jquery_ui_touch_punch": "~1.1",
-                "drupal/search_api": "^1.28||1.x-dev"
+                "drupal/jquery_ui_slider": "^2.1",
+                "drupal/jquery_ui_touch_punch": "^1.1",
+                "drupal/search_api": "1.x-dev"
             },
             "suggest": {
                 "drupal/jquery_ui_slider": "Required for the 'Facets Range Widget' module to work",
@@ -5496,8 +5496,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.7",
-                    "datestamp": "1709900263",
+                    "version": "2.0.9",
+                    "datestamp": "1728492418",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5533,7 +5533,7 @@
             "description": "The Facet module allows site builders to easily create and manage faceted search interfaces.",
             "homepage": "https://www.drupal.org/project/facets",
             "support": {
-                "source": "git://git.drupal.org/project/facets.git",
+                "source": "https://git.drupalcode.org/project/facets",
                 "issues": "https://www.drupal.org/project/issues/facets",
                 "irc": "irc://irc.freenode.org/drupal-search-api"
             }
@@ -10227,26 +10227,26 @@
         },
         {
             "name": "drupal/seckit",
-            "version": "2.0.1",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/seckit.git",
-                "reference": "2.0.1"
+                "reference": "2.0.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/seckit-2.0.1.zip",
-                "reference": "2.0.1",
-                "shasum": "2eee3b9719bdd5951c2b78f419c86f4765010439"
+                "url": "https://ftp.drupal.org/files/projects/seckit-2.0.3.zip",
+                "reference": "2.0.3",
+                "shasum": "34d38f2daaf99781ef6b7e7fbe2eeabc73a7ca16"
             },
             "require": {
-                "drupal/core": "^9.3 || ^10"
+                "drupal/core": "^9.5 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.0.1",
-                    "datestamp": "1671195208",
+                    "version": "2.0.3",
+                    "datestamp": "1726075930",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -10255,7 +10255,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0+"
+                "GPL-2.0-or-later"
             ],
             "authors": [
                 {
@@ -10282,7 +10282,7 @@
                 "security"
             ],
             "support": {
-                "source": "http://cgit.drupalcode.org/seckit",
+                "source": "https://git.drupalcode.org/project/seckit",
                 "issues": "http://drupal.org/project/issues/seckit"
             }
         },
