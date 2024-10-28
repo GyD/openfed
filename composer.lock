@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9d9018fb263ada2a8c91487a57254bf0",
+    "content-hash": "31bcf75079b97e6f7df565a81d58de6b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4500,38 +4500,27 @@
         },
         {
             "name": "drupal/diff",
-            "version": "1.8.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/diff.git",
-                "reference": "8.x-1.8"
+                "reference": "8.x-1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/diff-8.x-1.8.zip",
-                "reference": "8.x-1.8",
-                "shasum": "a104bf731a282f06ff0d5a7fb861c01b5b933765"
+                "url": "https://ftp.drupal.org/files/projects/diff-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "b7558b0f431d5945289829946e0beba61bf7ae18"
             },
             "require": {
-                "drupal/core": "^10 || ^11",
-                "mkalkbrenner/php-htmldiff-advanced": "~0.0.8",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "jangregor/phpstan-prophecy": "dev-master",
-                "mglaman/phpstan-drupal": "^1.2.10",
-                "phpstan/extension-installer": "^1.2",
-                "phpstan/phpstan": "^1.11",
-                "phpstan/phpstan-deprecation-rules": "*",
-                "phpstan/phpstan-phpunit": "1.4.x-dev",
-                "phpstan/phpstan-strict-rules": "^1@stable",
-                "previousnext/coding-standard": "1.0.1"
+                "drupal/core": "^9.3 || ^10",
+                "mkalkbrenner/php-htmldiff-advanced": "~0.0.8"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.8",
-                    "datestamp": "1727892285",
+                    "version": "8.x-1.1",
+                    "datestamp": "1665437355",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4569,9 +4558,8 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "Adam Bramley (acbramley)",
-                    "homepage": "https://www.drupal.org/u/acbramley",
-                    "role": "Maintainer"
+                    "name": "junyor",
+                    "homepage": "https://www.drupal.org/user/7006"
                 },
                 {
                     "name": "lhangea",
@@ -4601,7 +4589,7 @@
             "description": "Compares two entity revisions",
             "homepage": "https://www.drupal.org/project/diff",
             "support": {
-                "source": "https://git.drupalcode.org/project/diff",
+                "source": "http://cgit.drupalcode.org/diff",
                 "issues": "https://www.drupal.org/project/issues/diff"
             }
         },
